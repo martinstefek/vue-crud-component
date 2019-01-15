@@ -1,29 +1,29 @@
 <template>
     <div class="form-group">
-        <label v-text="itemName"></label>
-        <div v-text="itemValue"></div>
+        <label v-text="fieldName"></label>
+        <input type="tel" :value="content" @input="$emit('input', $event.target.value)" class="form-control">
     </div>
 </template>
 
 <script>
     export default {
         props: {
-            itemKey: {
-                required: true,
-            },
-
-            itemValue: {
+            fieldName: {
                 required: true
             },
 
-            itemName: {
-                required: true
-            }
+            value: {}
         },
 
         data() {
             return {
+                content: this.value
+            }
+        },
 
+        watch: {
+            value(newValue) {
+                this.content = newValue
             }
         }
     }

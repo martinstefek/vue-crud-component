@@ -1,30 +1,18 @@
 <template>
     <div class="form-group">
-        <label v-text="itemName"></label>
-        <div v-text="itemValue"></div>
+        <label v-text="fieldName"></label>
+        <div v-text="value" class="fake-form-control"></div>
     </div>
 </template>
 
 <script>
     export default {
         props: {
-            itemKey: {
-                required: true,
-            },
-
-            itemValue: {
+            fieldName: {
                 required: true
             },
 
-            itemName: {
-                required: true
-            }
+            value: {}
         },
-
-        data() {
-            return {
-
-            }
-        }
     }
 </script>

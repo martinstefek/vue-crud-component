@@ -7,6 +7,9 @@ const COMMON_TYPES_CONFIG = {
     sortable: false,
     searchable: false,
     filterable: false,
+    default: null,
+    componentProps: {},
+    canBeCreated: true,
 }
 
 export default {
@@ -16,7 +19,8 @@ export default {
             title: 'ID',
             editable: false,
             searchable: true,
-            component: require('~/components/fields/CrudID')
+            component: require('~/components/fields/CrudID'),
+            canBeCreated: false,
         },
 
         Email: {
@@ -39,36 +43,31 @@ export default {
 
         Select: {
             ...COMMON_TYPES_CONFIG,
-            options: null,
-            optionsMap: null,
             component: require('~/components/fields/CrudSelect')
         },
 
         Status: {
             ...COMMON_TYPES_CONFIG,
-            options: null,
-            optionsMap: null,
-            component: require('~/components/fields/CrudStatus')
+            component: require('~/components/fields/CrudSelect')
         },
 
         Checkbox: {
             ...COMMON_TYPES_CONFIG,
-            options: null,
-            optionsMap: null,
             component: require('~/components/fields/CrudCheckbox')
         },
 
         Radio: {
             ...COMMON_TYPES_CONFIG,
-            options: null,
-            optionsMap: null,
             component: require('~/components/fields/CrudRadio')
         },
 
-        Datepicker: {
+        DateTime: {
             ...COMMON_TYPES_CONFIG,
-            allowTime: true,
-            component: require('~/components/fields/CrudDatepicker')
+            component: require('~/components/fields/CrudDateTime')
+        },
+
+        Custom: {
+            ...COMMON_TYPES_CONFIG
         }
     }
 }

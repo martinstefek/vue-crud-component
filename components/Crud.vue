@@ -1,43 +1,54 @@
 <template>
-    <div class="my-admin">
-        <div>
-            <label>Search</label>
-            <input type="text" v-model="search">
-        </div>
+    <div class="vue-crud-component">
+        <div class="vcc-preview">
+            <h2 class="vcc-main-title" v-text="entityPlural"></h2>
 
-        <div v-for="(filterValues, key) in filterData">
-            <span v-text="key"></span>
-            <div v-for="value in filterValues">
-                <label>
-                    <input type="checkbox" v-model="selectedFilters[key]" :value="value">
+            <div class="vcc-box-preheader">
+                <div class="vcc-search">
+                    <input type="text" v-model="search" class="form-control" placeholder="Search...">
+                </div>
 
-                    {{ value }}
-                </label>
+                <button type="button" class="btn-primary vcc-add-entity" @click="create">Create {{ entitySingular }}</button>
+            </div>
+
+            <div class="vcc-box">
+                <div class="vcc-box-header">
+                    <div class="vcc-filters">
+                        <div v-for="(filterValues, key) in filterData" class="vcc-filter-item">
+                            <span v-text="fieldsConfig[key].title || key"></span>
+                            <div v-for="value in filterValues" class="vcc-filter-value">
+                                <label>
+                                    <input type="checkbox" v-model="selectedFilters[key]" :value="value">
+
+                                    {{ value }}
+                                </label>
+                            </div>
+                        </div>
+
+                        <button @click="resetAllFilters" type="button" class="vcc-filters-reset">Reset all filters
+                        </button>
+                    </div>
+                </div>
+
+                <slot name="preview" :preview-fields="fieldsPreview" :records="recordsFiltered">
+                    <table class="vcc-record-list">
+                        <thead>
+                        <tr>
+                            <th v-for="(field, key) in fieldsPreview" v-text="field.title"
+                                @click="sort(key, field)"></th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr v-for="(field, index) in recordsFiltered">
+                            <td v-for="(value, key, index) in fieldsPreview" v-text="field[key]"></td>
+                            <td><span @click="edit(field, index)">Edit</span></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </slot>
             </div>
         </div>
-
-        <span @click="resetAllFilters">Reset all filters</span>
-
-        <div>
-            <button type="button">Create entity</button>
-        </div>
-
-        <slot name="preview" :preview-fields="fieldsPreview" :records="recordsFiltered">
-            <table class="my-admin-records-list">
-                <thead>
-                    <tr>
-                        <th v-for="(field, key) in fieldsPreview" v-text="field.title" @click="sort(key, field)"></th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="(field) in recordsFiltered">
-                        <td v-for="(value, key) in fieldsPreview" v-text="field[key]"></td>
-                        <td><span @click="edit(field)">Edit</span></td>
-                    </tr>
-                </tbody>
-            </table>
-        </slot>
 
         <!-- Edit -->
         <div v-if="selectedRecord">
@@ -47,14 +58,11 @@
 </template>
 
 <script>
-// TODO: Create new record
-// TODO: Edit record
-// TODO: Delete record
-// TODO: Use SweetAlert
 // TODO: Clean the code, remove unnecessary Lodash functions
-// TODO: Create field type components
-// TODO: Add VeeValidate validation of the fields
-// TODO: Add styles
+// TODO: Switch between Form and preview + back button from form
+// TODO: Remove delete button from Form view when create entity is triggered
+// TODO: Think about more customisable preview and form views
+// TODO: Add styles (some css library)
 import config from '~/config/Crud.js'
 import CrudForm from '~/components/CrudForm'
 
@@ -81,17 +89,17 @@ export default {
 
         httpCreate: {
             type: String,
-            default: () => ''
+            default: () => (location.pathname + '/create').replace('//', '/'),
         },
 
         httpUpdate: {
             type: String,
-            default: () => ''
+            default: () => (location.pathname + '/{id}').replace('//', '/')
         },
 
         httpDelete: {
             type: String,
-            default: () => ''
+            default: () => (location.pathname + '/{id}').replace('//', '/')
         },
 
         allowSearch: {
@@ -117,6 +125,18 @@ export default {
         allowDelete: {
             type: Boolean,
             default: true,
+        },
+
+        entitySingular: {
+            default: 'Record'
+        },
+
+        entityPlural: {
+            default: 'Records'
+        },
+
+        uniqueIdentifier: {
+            default: 'id'
         }
     },
 
@@ -141,6 +161,7 @@ export default {
             selectedFiltersData: {},
 
             selectedRecord: null,
+            selectedRecordIndex: null,
 
             selectedSorting: null,
             sortDirection: 'ASC'
@@ -328,12 +349,27 @@ export default {
         /**
          * Selects record so it can be edited
          */
-        edit(record) {
-            this.selectedRecord = record
+        edit(record, index = null) {
+            let output = {}
+            Object.keys(this.fieldsConfig).forEach(key => output[key] = this.fieldsConfig[key].default)
+            this.selectedRecord = {...output, ...this.deepCopy(record)}
+            this.selectedRecordIndex = index
         },
 
         editReset() {
             this.selectedRecord = null
+            this.selectedRecordIndex = null
+        },
+
+        create() {
+            let output = {}
+            Object.keys(this.fieldsConfig).forEach(key => {
+                if (this.fieldsConfig[key].canBeCreated) {
+                    output[key] = this.fieldsConfig[key].default
+                }
+            })
+            this.selectedRecord = output
+            this.selectedRecordIndex = 'CREATE'
         },
 
         /**
@@ -359,10 +395,7 @@ export default {
     },
 
     created() {
-        /**
-         * This property contains whole non customizable configuration of the crud
-         * @type {Object}
-         */
+
     },
 
     watch: {
@@ -371,27 +404,91 @@ export default {
 }
 </script>
 
-<style lagn="scss">
-    .my-admin-records-list {
+<style lang="scss">
+.vue-crud-component {
+    font-family: sans-serif;
+
+    .form-control {
+        background: #fff;
+        border: 1px solid #e3e3de;
+        box-shadow: 1px 1px 1px rgba(110, 110, 110, 0.1);
+        padding: 10px 15px;
+        font-size: 16px;
+        border-radius: 4px;
+    }
+
+    select.form-control {
+        height: 40px;
+    }
+
+    .fake-form-control {
+        padding: 12px 15px 0px;
+        font-size: 16px;
+    }
+
+    .checkbox-radio-wrap {
+        padding: 12px 0;
+        font-size: 16px;
+    }
+
+    .btn-primary {
+        padding: 10px 15px;
+        background: #05282e;
+        color: #ffffff;
+        font-size: 16px;
+    }
+
+    .vcc-search {
+        margin-bottom: 15px;
+        float: left;
+        width: 100%;
+        max-width: 240px;
+
+        .form-control {
+            display: block;
+            width: 100%;
+        }
+    }
+
+    .vcc-add-entity {
+        float: right;
+    }
+
+    .vcc-box {
+        background: #ffffff;
+        padding: 15px;
+        clear: both;
+    }
+
+    .vcc-box-header {
+        margin-bottom: 15px;
+    }
+
+    .vcc-record-list {
         width: 100%;
         text-align: left;
-        font-family: sans-serif;
         color: #313135;
         border-collapse: collapse;
-    }
 
-    .my-admin-records-list thead tr {
-        border-bottom: 2px solid rgba(0,0,0,0.1);
-    }
+        thead {
+            tr {
+                background-color: #e7edef;
+            }
 
-    .my-admin-records-list thead th {
-        padding: 10px 4px;
-    }
+            th {
+                padding: 10px 4px;
+            }
+        }
 
-    .my-admin-records-list tbody td {
-        padding: 10px 4px;
+        tbody {
+            td {
+                padding: 10px 4px;
+            }
+
+            tr {
+                border-bottom: 1px solid rgba(0,0,0,0.1);
+            }
+        }
     }
-    .my-admin-records-list tbody tr {
-        border-bottom: 1px solid rgba(0,0,0,0.1);
-    }
+}
 </style>

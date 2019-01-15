@@ -1,6 +1,6 @@
 <template>
     <div class="form-group">
-        <label v-text="itemName"></label>
+        <label v-text="fieldName"></label>
         <div v-text="itemValue"></div>
     </div>
 </template>
@@ -8,15 +8,11 @@
 <script>
     export default {
         props: {
-            itemKey: {
-                required: true,
-            },
-
             itemValue: {
                 required: true
             },
 
-            itemName: {
+            fieldName: {
                 required: true
             }
         },
