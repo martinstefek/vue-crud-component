@@ -1,17 +1,10 @@
 <template>
-    <div class="form-group">
-        <label v-text="fieldName"></label>
-        <input type="text" :value="content" @input="$emit('input', $event.target.value)" class="form-control">
-    </div>
+    <input type="text" :value="content" @input="$emit('input', $event.target.value)" class="form-control">
 </template>
 
 <script>
     export default {
         props: {
-            fieldName: {
-                required: true
-            },
-
             value: {}
         },
 

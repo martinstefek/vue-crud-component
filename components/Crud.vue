@@ -1,52 +1,69 @@
 <template>
-    <div class="vue-crud-component">
-        <div class="vcc-preview">
-            <h2 class="vcc-main-title" v-text="entityPlural"></h2>
+    <div>
+        <div v-if="!selectedRecord">
+            <div class="clearfix">
+                <h2 v-text="entityPlural" class="mt-2 float-left"></h2>
 
-            <div class="vcc-box-preheader">
-                <div class="vcc-search">
-                    <input type="text" v-model="search" class="form-control" placeholder="Search...">
-                </div>
-
-                <button type="button" class="btn-primary vcc-add-entity" @click="create">Create {{ entitySingular }}</button>
+                <button class="btn btn-primary mt-2 float-right" @click="create" type="button" >
+                    Create {{ entitySingular }}
+                </button>
             </div>
 
-            <div class="vcc-box">
-                <div class="vcc-box-header">
-                    <div class="vcc-filters">
-                        <div v-for="(filterValues, key) in filterData" class="vcc-filter-item">
-                            <span v-text="fieldsConfig[key].title || key"></span>
-                            <div v-for="value in filterValues" class="vcc-filter-value">
-                                <label>
-                                    <input type="checkbox" v-model="selectedFilters[key]" :value="value">
-
-                                    {{ value }}
-                                </label>
-                            </div>
+            <div class="card">
+                <div class="card-body">
+                    <div class="row pb-2 mb-2 clearfix">
+                        <div class="col-sm-6 col-md-4">
+                            <input type="text" v-model="search" class="form-control" placeholder="Search...">
                         </div>
 
-                        <button @click="resetAllFilters" type="button" class="vcc-filters-reset">Reset all filters
-                        </button>
-                    </div>
-                </div>
+                        <div class="col">
+                            <div class="btn-group float-right" v-click-outside="() => filtersOpened = false">
+                                <button type="button" class="btn btn-link dropdown-toggle"
+                                        @click="filtersOpened = !filtersOpened">
+                                    Filters
+                                </button>
+                                <div class="dropdown-menu"
+                                     :class="{show: filtersOpened, 'dropdown-menu-right': useDefaultStyles}">
+                                    <template v-for="(filterValues, key) in filterData">
+                                        <div class="dropdown-item">
+                                            <strong v-text="fieldsConfig[key].title || key"></strong>
+                                        </div>
 
-                <slot name="preview" :preview-fields="fieldsPreview" :records="recordsFiltered">
-                    <table class="vcc-record-list">
-                        <thead>
-                        <tr>
-                            <th v-for="(field, key) in fieldsPreview" v-text="field.title"
-                                @click="sort(key, field)"></th>
-                            <th></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr v-for="(field, index) in recordsFiltered">
-                            <td v-for="(value, key, index) in fieldsPreview" v-text="field[key]"></td>
-                            <td><span @click="edit(field, index)">Edit</span></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </slot>
+                                        <label v-for="value in filterValues" class="dropdown-item">
+                                            <input type="checkbox" v-model="selectedFilters[key]" :value="value">
+
+                                            {{ value }}
+                                        </label>
+
+                                        <div class="dropdown-divider"></div>
+                                    </template>
+
+                                    <button @click="resetAllFilters" class="btn btn-link pl-4 pr-4" type="button">
+                                        Reset all filters
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <slot name="preview" :preview-fields="fieldsPreview" :records="recordsFiltered">
+                        <table class="table">
+                            <thead>
+                            <tr class="bg-light">
+                                <th v-for="(field, key) in fieldsPreview" v-text="field.title"
+                                    @click="sort(key, field)"></th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr v-for="(field, index) in recordsFiltered">
+                                <td v-for="(value, key, index) in fieldsPreview" v-text="field[key]"></td>
+                                <td class="text-right"><button @click="edit(field, index)" class="btn btn-link p-0" type="button">Edit</button></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </slot>
+                </div>
             </div>
         </div>
 
@@ -59,12 +76,11 @@
 
 <script>
 // TODO: Clean the code, remove unnecessary Lodash functions
-// TODO: Switch between Form and preview + back button from form
-// TODO: Remove delete button from Form view when create entity is triggered
 // TODO: Think about more customisable preview and form views
-// TODO: Add styles (some css library)
+// TODO: IE support
 import config from '~/config/Crud.js'
 import CrudForm from '~/components/CrudForm'
+import ClickOutside from 'vue-click-outside'
 
 const lodash = {
     // get: require('lodash.get'),
@@ -74,9 +90,14 @@ const lodash = {
 }
 
 export default {
+    directives: { ClickOutside },
     components: { CrudForm },
 
     props: {
+        useDefaultStyles: {
+            default: true
+        },
+
         data: {
             type: [Object, Array],
             required: true
@@ -164,7 +185,8 @@ export default {
             selectedRecordIndex: null,
 
             selectedSorting: null,
-            sortDirection: 'ASC'
+            sortDirection: 'ASC',
+            filtersOpened: false,
         }
     },
 
@@ -344,6 +366,8 @@ export default {
             for (const [key, value] of Object.entries(this.selectedFilters)) {
                 this.selectedFilters[key] = []
             }
+
+            this.filtersOpened = false
         },
 
         /**
@@ -404,91 +428,9 @@ export default {
 }
 </script>
 
-<style lang="scss">
-.vue-crud-component {
-    font-family: sans-serif;
-
-    .form-control {
-        background: #fff;
-        border: 1px solid #e3e3de;
-        box-shadow: 1px 1px 1px rgba(110, 110, 110, 0.1);
-        padding: 10px 15px;
-        font-size: 16px;
-        border-radius: 4px;
+<style>
+    .dropdown-menu.dropdown-menu-right {
+        right: 0;
+        left: auto;
     }
-
-    select.form-control {
-        height: 40px;
-    }
-
-    .fake-form-control {
-        padding: 12px 15px 0px;
-        font-size: 16px;
-    }
-
-    .checkbox-radio-wrap {
-        padding: 12px 0;
-        font-size: 16px;
-    }
-
-    .btn-primary {
-        padding: 10px 15px;
-        background: #05282e;
-        color: #ffffff;
-        font-size: 16px;
-    }
-
-    .vcc-search {
-        margin-bottom: 15px;
-        float: left;
-        width: 100%;
-        max-width: 240px;
-
-        .form-control {
-            display: block;
-            width: 100%;
-        }
-    }
-
-    .vcc-add-entity {
-        float: right;
-    }
-
-    .vcc-box {
-        background: #ffffff;
-        padding: 15px;
-        clear: both;
-    }
-
-    .vcc-box-header {
-        margin-bottom: 15px;
-    }
-
-    .vcc-record-list {
-        width: 100%;
-        text-align: left;
-        color: #313135;
-        border-collapse: collapse;
-
-        thead {
-            tr {
-                background-color: #e7edef;
-            }
-
-            th {
-                padding: 10px 4px;
-            }
-        }
-
-        tbody {
-            td {
-                padding: 10px 4px;
-            }
-
-            tr {
-                border-bottom: 1px solid rgba(0,0,0,0.1);
-            }
-        }
-    }
-}
 </style>

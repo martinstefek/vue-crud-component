@@ -1,13 +1,10 @@
 <template>
-    <div class="form-group">
-        <label v-text="fieldName"></label>
-        <div class="checkbox-radio-wrap">
-            <div v-for="(optionName, optionKey) in options" class="vcc-input-spacer">
-                <label>
-                    <input v-model="content" type="checkbox" :value="optionKey">
-                    <span v-text="optionName"></span>
-                </label>
-            </div>
+    <div>
+        <div v-for="(optionName, optionKey) in options">
+            <label>
+                <input v-model="content" type="checkbox" :value="optionKey">
+                <span v-text="optionName"></span>
+            </label>
         </div>
     </div>
 </template>
@@ -15,10 +12,6 @@
 <script>
     export default {
         props: {
-            fieldName: {
-                required: true
-            },
-
             options: {
                 required: true
             },

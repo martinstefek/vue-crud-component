@@ -1,24 +1,37 @@
 <template>
     <div>
-        <div class="vcc-box vcc-form">
-            <div v-for="(value, key) in record">
-                <component :is="fieldsConfig[key].component"
-                           :field-name="fieldsConfig[key].title || key"
-                           :component-props="fieldsConfig[key].componentProps"
-                           :key="'form_field_' + key + '_' + recordIndex"
-                           v-bind="fieldsConfig[key].componentProps"
-                           v-model="$parent.selectedRecord[key]"
-                           @input="validator.validate(key)"
-                ></component>
-                <span v-if="errors[key]" v-text="errors[key]"></span>
+        <h2 v-text="heading" class="mt-2"></h2>
+
+        <button @click="backToPreview" class="btn btn-link p-0 mb-3" type="button">
+            Back to list of the {{ $parent.entityPlural }}
+        </button>
+
+        <div class="card">
+            <div class="card-body clearfix">
+                <div v-for="(value, key) in record" class="form-group row border-bottom pb-3">
+                    <label v-text="fieldsConfig[key].title || key" class="col-sm-3 col-md-2 col-form-label"></label>
+
+                    <div class="col-sm-9 col-md-10">
+                        <component :is="fieldsConfig[key].component"
+                                   :component-props="fieldsConfig[key].componentProps"
+                                   :key="'form_field_' + key + '_' + recordIndex"
+                                   v-bind="fieldsConfig[key].componentProps"
+                                   v-model="$parent.selectedRecord[key]"
+                                   @input="validator.validate(key)"
+                        ></component>
+
+                        <span v-if="errors[key]" v-text="errors[key]" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <button v-if="recordIndex !== 'CREATE'" @click="remove" type="button" class="btn btn-outline-danger">
+                    Delete
+                </button>
+
+                <button @click="recordIndex === 'CREATE' ? create() : update()" type="button" class="btn btn-primary float-right">
+                    {{ recordIndex === 'CREATE' ? 'Create' : 'Update' }}
+                </button>
             </div>
-
-            <button type="button" class="btn-primary" v-if="recordIndex === 'CREATE'" v-text="'Create'" @click="create"></button>
-            <button type="button" class="btn-primary" v-if="recordIndex !== 'CREATE'" v-text="'Update'" @click="update"></button>
-        </div>
-
-        <div class="vcc-box">
-            <button type="button" class="btn-primary" @click="remove">Delete</button>
         </div>
 
         <notifications group="main" />
@@ -39,6 +52,10 @@
     // https://www.npmjs.com/package/vue-notification
 
     export default {
+
+        /**
+         * On created life hook, create Validator instance and attach every field with value, getter, alias...
+         */
         created() {
             this.validator = new Validator()
 
@@ -55,27 +72,50 @@
 
         data() {
             return {
+                /**
+                 * Reactive VeeValidate Validator instance
+                 */
                 validator: new Validator()
             }
         },
 
         computed: {
+            /**
+             * Currently selected record
+             */
             record() {
                 return this.$parent.selectedRecord
             },
 
+            /**
+             * FieldsConfig inherited from parent
+             */
             fieldsConfig() {
                 return this.$parent.fieldsConfig
             },
 
+            /**
+             * Index of the selected record
+             */
             recordIndex() {
                 return this.$parent.selectedRecordIndex
             },
 
+            /**
+             * List of all errors. Used for showing error messages
+             */
             errors() {
                 let output = {}
                 this.validator.errors.items.forEach(item => output[item.field] = item.msg)
                 return output
+            },
+
+            heading() {
+                if (this.recordIndex === 'CREATE') {
+                    return 'Creating ' + this.$parent.entitySingular
+                }
+
+                return 'Editing ' + this.$parent.entitySingular + ' ' + this.record[this.$parent.uniqueIdentifier]
             }
         },
 
@@ -110,7 +150,9 @@
                     })
             },
 
-
+            /**
+             * If prompt is accepted, then removes record and show roast
+             */
             async remove() {
                 return this.$swal({
                     title: 'Are you sure?',
@@ -141,38 +183,10 @@
                     position: 'top right',
                 });
             },
+
+            backToPreview() {
+                this.$parent.editReset()
+            }
         },
     }
 </script>
-
-<style lang="scss">
-.vue-crud-component {
-    .vcc-form {
-        .form-group {
-            display: flex;
-            align-items: flex-start;
-            padding: 10px 0;
-            border-bottom: 1px solid #e3e3de;
-
-            > label {
-                flex: 0 0 200px;
-                padding: 12px 15px 0;
-                color: rgba(0, 0, 0, .6);
-            }
-
-            > label + *, .form-control {
-                width: 100%;
-                max-width: 300px;
-            }
-        }
-
-        .vcc-input-spacer {
-            margin-bottom: 15px;
-
-            &:last-of-type {
-                margin-bottom: 0;
-            }
-        }
-    }
-}
-</style>

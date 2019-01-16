@@ -1,17 +1,10 @@
 <template>
-    <div class="form-group">
-        <label v-text="fieldName"></label>
-        <div v-text="value" class="fake-form-control"></div>
-    </div>
+    <div v-text="value" class="form-control-plaintext"></div>
 </template>
 
 <script>
     export default {
         props: {
-            fieldName: {
-                required: true
-            },
-
             value: {}
         },
     }

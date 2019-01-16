@@ -1,8 +1,5 @@
 <template>
-    <div class="form-group">
-        <label v-text="fieldName"></label>
-        <Datetime v-model="content" input-class="form-control" v-bind="componentProps"></Datetime>
-    </div>
+    <Datetime v-model="content" input-class="form-control" v-bind="componentProps"></Datetime>
 </template>
 
 <script>
@@ -15,12 +12,7 @@
         components: { Datetime },
 
         props: {
-            fieldName: {
-                required: true
-            },
-
             value: {},
-
             componentProps: {}
         },
 
