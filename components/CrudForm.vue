@@ -39,17 +39,9 @@
 </template>
 
 <script>
-    import Vue from 'vue'
+    // import Vue from 'vue'
     import axios from 'axios'
     import { Validator } from 'vee-validate'
-    import VueSweetalert2 from 'vue-sweetalert2'
-    import Notifications from 'vue-notification'
-
-    Vue.use(VueSweetalert2)
-    // https://www.npmjs.com/package/vue-sweetalert2
-
-    Vue.use(Notifications)
-    // https://www.npmjs.com/package/vue-notification
 
     export default {
 

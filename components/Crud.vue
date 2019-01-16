@@ -78,8 +78,8 @@
 // TODO: Clean the code, remove unnecessary Lodash functions
 // TODO: Think about more customisable preview and form views
 // TODO: IE support
-import config from '~/config/Crud.js'
-import CrudForm from '~/components/CrudForm'
+import config from '../config/Crud.js'
+import CrudForm from './CrudForm'
 import ClickOutside from 'vue-click-outside'
 
 const lodash = {

@@ -19,7 +19,7 @@ export default {
             title: 'ID',
             editable: false,
             searchable: true,
-            component: require('~/components/fields/CrudID'),
+            component: require('../components/fields/CrudID'),
             canBeCreated: false,
         },
 
@@ -27,43 +27,43 @@ export default {
             ...COMMON_TYPES_CONFIG,
             title: 'Email',
             searchable: true,
-            component: require('~/components/fields/CrudEmail')
+            component: require('../components/fields/CrudEmail')
         },
 
         Text: {
             ...COMMON_TYPES_CONFIG,
             searchable: true,
-            component: require('~/components/fields/CrudText')
+            component: require('../components/fields/CrudText')
         },
 
         Number: {
             ...COMMON_TYPES_CONFIG,
-            component: require('~/components/fields/CrudNumber')
+            component: require('../components/fields/CrudNumber')
         },
 
         Select: {
             ...COMMON_TYPES_CONFIG,
-            component: require('~/components/fields/CrudSelect')
+            component: require('../components/fields/CrudSelect')
         },
 
         Status: {
             ...COMMON_TYPES_CONFIG,
-            component: require('~/components/fields/CrudSelect')
+            component: require('../components/fields/CrudSelect')
         },
 
         Checkbox: {
             ...COMMON_TYPES_CONFIG,
-            component: require('~/components/fields/CrudCheckbox')
+            component: require('../components/fields/CrudCheckbox')
         },
 
         Radio: {
             ...COMMON_TYPES_CONFIG,
-            component: require('~/components/fields/CrudRadio')
+            component: require('../components/fields/CrudRadio')
         },
 
         DateTime: {
             ...COMMON_TYPES_CONFIG,
-            component: require('~/components/fields/CrudDateTime')
+            component: require('../components/fields/CrudDateTime')
         },
 
         Custom: {
