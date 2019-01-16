@@ -1,0 +1,5 @@
+/node_modules
+/.gitignore
+/mix-manifest.json
+/yarn.lock
+/webpack.mix.js

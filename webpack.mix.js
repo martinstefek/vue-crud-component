@@ -7,6 +7,6 @@ mix.setPublicPath('./')
 /**
  * Generating of Javascript and CSS
  */
-mix.js('src/js/index.js', 'dist')
+mix.js('src/index.js', 'dist')
 
 mix.disableSuccessNotifications()
