@@ -102,6 +102,9 @@
                 return output
             },
 
+            /**
+             * Heading of the form view
+             */
             heading() {
                 if (this.recordIndex === 'CREATE') {
                     return 'Creating ' + this.$parent.entitySingular
