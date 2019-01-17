@@ -16,7 +16,7 @@ or
 	<crud-component></crud-component>
 	</template>
 
-You can set your own name of the component by passing object with name property in a second second argument of the `Vue.use()` method.
+You can set your own name of the component by passing name property within object in a second argument of the `Vue.use()` method.
 `Vue.use(CrudComponent, {name: 'custom-component-name'})`
 
 The default component name is `crud-component`. 
