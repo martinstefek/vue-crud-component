@@ -1,6 +1,6 @@
 
 ## Introduction
-Vue Crud Component is a Vue.js component which do all the annoying repetitive administration views for you. 
+Vue Crud Component is a Vue.js component which do all the annoying repetitive administration views for you. This component uses Bootstrap classes. So, if you wish you can add bootstrap css or style it by yourself. 
 
 ## Installation
 `yarn add vue-crud-component`
@@ -20,6 +20,8 @@ You can set your own name of the component by passing name property within objec
 `Vue.use(CrudComponent, {name: 'custom-component-name'})`
 
 The default component name is `crud-component`. 
+
+Since this component is using bootstrap classes I recommend you to include bootstrap css. [Here is a manual](https://getbootstrap.com/docs/4.2/getting-started/introduction/).
 
 ## Setup
 
