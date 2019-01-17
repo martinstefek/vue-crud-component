@@ -2043,7 +2043,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 //
 //
 
-// TODO: Clean the code, remove unnecessary Lodash functions
+// TODO: Clean the code, remove unnecessary Lodash functions - create Preview component and use Crud.vue as source
 // TODO: Think about more customisable preview and form views
 // TODO: IE support
 // TODO: Check default property of COMMON_TYPES_CONFIG. Is it used?
@@ -2054,6 +2054,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 // TODO: Check Crud.vue allowDelete prop
 // TODO: Check Crud.vue uniqueIdentifier
 // TODO: Try to add deeper fields config eg. type.name or type['name']
+// TODO: Use location ['preview', 'update', 'create'] instead of ['preview', 'form']
 
 
 
@@ -12845,6 +12846,11 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             });
             return output;
         },
+
+
+        /**
+         * Heading of the form view
+         */
         heading: function heading() {
             if (this.recordIndex === 'CREATE') {
                 return 'Creating ' + this.$parent.entitySingular;
@@ -26286,21 +26292,23 @@ var render = function() {
               domProps: { textContent: _vm._s(_vm.entityPlural) }
             }),
             _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-primary mt-2 float-right",
-                attrs: { type: "button" },
-                on: { click: _vm.create }
-              },
-              [
-                _vm._v(
-                  "\n                Create " +
-                    _vm._s(_vm.entitySingular) +
-                    "\n            "
+            _vm.allowCreate
+              ? _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary mt-2 float-right",
+                    attrs: { type: "button" },
+                    on: { click: _vm.create }
+                  },
+                  [
+                    _vm._v(
+                      "\n                Create " +
+                        _vm._s(_vm.entitySingular) +
+                        "\n            "
+                    )
+                  ]
                 )
-              ]
-            )
+              : _vm._e()
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "card" }, [
@@ -26309,179 +26317,197 @@ var render = function() {
               { staticClass: "card-body" },
               [
                 _c("div", { staticClass: "row pb-2 mb-2 clearfix" }, [
-                  _c("div", { staticClass: "col-sm-6 col-md-4" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.search,
-                          expression: "search"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: { type: "text", placeholder: "Search..." },
-                      domProps: { value: _vm.search },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.search = $event.target.value
-                        }
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col" }, [
-                    _c(
-                      "div",
-                      {
-                        directives: [
-                          {
-                            name: "click-outside",
-                            rawName: "v-click-outside",
-                            value: function() {
-                              return (_vm.filtersOpened = false)
-                            },
-                            expression: "() => filtersOpened = false"
-                          }
-                        ],
-                        staticClass: "btn-group float-right"
-                      },
-                      [
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-link dropdown-toggle",
-                            attrs: { type: "button" },
-                            on: {
-                              click: function($event) {
-                                _vm.filtersOpened = !_vm.filtersOpened
-                              }
+                  _vm.allowSearch
+                    ? _c("div", { staticClass: "col-sm-6 col-md-4" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.search,
+                              expression: "search"
                             }
-                          },
-                          [
-                            _vm._v(
-                              "\n                                Filters\n                            "
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
+                          ],
+                          staticClass: "form-control",
+                          attrs: { type: "text", placeholder: "Search..." },
+                          domProps: { value: _vm.search },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.search = $event.target.value
+                            }
+                          }
+                        })
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.allowFilter
+                    ? _c("div", { staticClass: "col" }, [
                         _c(
                           "div",
                           {
-                            staticClass: "dropdown-menu dropdown-menu-right",
-                            class: { show: _vm.filtersOpened }
+                            directives: [
+                              {
+                                name: "click-outside",
+                                rawName: "v-click-outside",
+                                value: function() {
+                                  return (_vm.filtersOpened = false)
+                                },
+                                expression: "() => filtersOpened = false"
+                              }
+                            ],
+                            staticClass: "btn-group float-right"
                           },
                           [
-                            _vm._l(_vm.filterData, function(filterValues, key) {
-                              return [
-                                _c("div", { staticClass: "dropdown-item" }, [
-                                  _c("strong", {
-                                    domProps: {
-                                      textContent: _vm._s(
-                                        _vm.fieldsConfig[key].title || key
-                                      )
-                                    }
-                                  })
-                                ]),
-                                _vm._v(" "),
-                                _vm._l(filterValues, function(value) {
-                                  return _c(
-                                    "label",
-                                    { staticClass: "dropdown-item" },
-                                    [
-                                      _c("input", {
-                                        directives: [
-                                          {
-                                            name: "model",
-                                            rawName: "v-model",
-                                            value: _vm.selectedFilters[key],
-                                            expression: "selectedFilters[key]"
-                                          }
-                                        ],
-                                        attrs: { type: "checkbox" },
-                                        domProps: {
-                                          value: value,
-                                          checked: Array.isArray(
-                                            _vm.selectedFilters[key]
-                                          )
-                                            ? _vm._i(
-                                                _vm.selectedFilters[key],
-                                                value
-                                              ) > -1
-                                            : _vm.selectedFilters[key]
-                                        },
-                                        on: {
-                                          change: function($event) {
-                                            var $$a = _vm.selectedFilters[key],
-                                              $$el = $event.target,
-                                              $$c = $$el.checked ? true : false
-                                            if (Array.isArray($$a)) {
-                                              var $$v = value,
-                                                $$i = _vm._i($$a, $$v)
-                                              if ($$el.checked) {
-                                                $$i < 0 &&
-                                                  _vm.$set(
-                                                    _vm.selectedFilters,
-                                                    key,
-                                                    $$a.concat([$$v])
-                                                  )
-                                              } else {
-                                                $$i > -1 &&
-                                                  _vm.$set(
-                                                    _vm.selectedFilters,
-                                                    key,
-                                                    $$a
-                                                      .slice(0, $$i)
-                                                      .concat(
-                                                        $$a.slice($$i + 1)
-                                                      )
-                                                  )
-                                              }
-                                            } else {
-                                              _vm.$set(
-                                                _vm.selectedFilters,
-                                                key,
-                                                $$c
-                                              )
-                                            }
-                                          }
-                                        }
-                                      }),
-                                      _vm._v(
-                                        "\n\n                                        " +
-                                          _vm._s(value) +
-                                          "\n                                    "
-                                      )
-                                    ]
-                                  )
-                                }),
-                                _vm._v(" "),
-                                _c("div", { staticClass: "dropdown-divider" })
-                              ]
-                            }),
-                            _vm._v(" "),
                             _c(
                               "button",
                               {
-                                staticClass: "btn btn-link pl-4 pr-4",
+                                staticClass: "btn btn-link dropdown-toggle",
                                 attrs: { type: "button" },
-                                on: { click: _vm.resetAllFilters }
+                                on: {
+                                  click: function($event) {
+                                    _vm.filtersOpened = !_vm.filtersOpened
+                                  }
+                                }
                               },
                               [
                                 _vm._v(
-                                  "\n                                    Reset all filters\n                                "
+                                  "\n                                Filters\n                            "
                                 )
                               ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "dropdown-menu dropdown-menu-right",
+                                class: { show: _vm.filtersOpened }
+                              },
+                              [
+                                _vm._l(_vm.filterData, function(
+                                  filterValues,
+                                  key
+                                ) {
+                                  return [
+                                    _c(
+                                      "div",
+                                      { staticClass: "dropdown-item" },
+                                      [
+                                        _c("strong", {
+                                          domProps: {
+                                            textContent: _vm._s(
+                                              _vm.fieldsConfig[key].title || key
+                                            )
+                                          }
+                                        })
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _vm._l(filterValues, function(value) {
+                                      return _c(
+                                        "label",
+                                        { staticClass: "dropdown-item" },
+                                        [
+                                          _c("input", {
+                                            directives: [
+                                              {
+                                                name: "model",
+                                                rawName: "v-model",
+                                                value: _vm.selectedFilters[key],
+                                                expression:
+                                                  "selectedFilters[key]"
+                                              }
+                                            ],
+                                            attrs: { type: "checkbox" },
+                                            domProps: {
+                                              value: value,
+                                              checked: Array.isArray(
+                                                _vm.selectedFilters[key]
+                                              )
+                                                ? _vm._i(
+                                                    _vm.selectedFilters[key],
+                                                    value
+                                                  ) > -1
+                                                : _vm.selectedFilters[key]
+                                            },
+                                            on: {
+                                              change: function($event) {
+                                                var $$a =
+                                                    _vm.selectedFilters[key],
+                                                  $$el = $event.target,
+                                                  $$c = $$el.checked
+                                                    ? true
+                                                    : false
+                                                if (Array.isArray($$a)) {
+                                                  var $$v = value,
+                                                    $$i = _vm._i($$a, $$v)
+                                                  if ($$el.checked) {
+                                                    $$i < 0 &&
+                                                      _vm.$set(
+                                                        _vm.selectedFilters,
+                                                        key,
+                                                        $$a.concat([$$v])
+                                                      )
+                                                  } else {
+                                                    $$i > -1 &&
+                                                      _vm.$set(
+                                                        _vm.selectedFilters,
+                                                        key,
+                                                        $$a
+                                                          .slice(0, $$i)
+                                                          .concat(
+                                                            $$a.slice($$i + 1)
+                                                          )
+                                                      )
+                                                  }
+                                                } else {
+                                                  _vm.$set(
+                                                    _vm.selectedFilters,
+                                                    key,
+                                                    $$c
+                                                  )
+                                                }
+                                              }
+                                            }
+                                          }),
+                                          _vm._v(
+                                            "\n\n                                        " +
+                                              _vm._s(value) +
+                                              "\n                                    "
+                                          )
+                                        ]
+                                      )
+                                    }),
+                                    _vm._v(" "),
+                                    _c("div", {
+                                      staticClass: "dropdown-divider"
+                                    })
+                                  ]
+                                }),
+                                _vm._v(" "),
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-link pl-4 pr-4",
+                                    attrs: { type: "button" },
+                                    on: { click: _vm.resetAllFilters }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                    Reset all filters\n                                "
+                                    )
+                                  ]
+                                )
+                              ],
+                              2
                             )
-                          ],
-                          2
+                          ]
                         )
-                      ]
-                    )
-                  ])
+                      ])
+                    : _vm._e()
                 ]),
                 _vm._v(" "),
                 _vm._t(
