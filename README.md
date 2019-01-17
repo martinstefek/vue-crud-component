@@ -27,7 +27,7 @@ The default component name is `crud-component`.
 | Parameter | type | required | default | description |
 |-----------|------|----------|---------|-------------|
 | data | `Array` | `true` | `null` | It expects Array of Objects which are used to show data in a table. |
-| fields | `Object` | `true` | `null` | In this Object you can specify type of the specific fields. eg. birthdate can be set to DateTime. **You can find more detailed coumentation of this parameter at Fields paremeter documentation.** |
+| fields | `Object` | `true` | `null` | In this Object you can specify type of the specific fields. eg. birthdate can be set to DateTime. **You can find more detailed documentation of this parameter at Fields parameter documentation.** |
 | http-create | `String` | `false` | `currentPage/create` | Post request URL for create action. **{id} will be replaced with unique-identifier parameter** |
 | http-update | `String` | `false` | `currentPage/{id}` | Put request URL for update action. **{id} will be replaced with unique-identifier parameter** |
 | http-delete | `String` | `false` | `currentPage/{id}` | Delete request URL for delete action. **{id} will be replaced with unique-identifier parameter** |
@@ -40,8 +40,8 @@ The default component name is `crud-component`.
 | entity-plural | `String` | `false` | `Records` | It expects Array of Objects which are used to show data in a table. |
 | unique-identifier | `String` | `true` | `id` | It expects Array of Objects which are used to show data in a table. It is name of the property in object of data parameter. |
 
-## Fields paremeter documentation
-Field is a parameter of the component that is expected to be an `Object`. In fields parameter are specified types and additional cofiguration of values inside every single record of the **data parameter**.
+## Fields parameter documentation
+Field is a parameter of the component that is expected to be an `Object`. In fields parameter are specified types and additional configuration of values inside every single record of the **data parameter**.
 
 Every field key in the fields parameter has to be equal to some key in data parameter. If the field key isn't found in data, it's value is considered as null and can be updated or created in form.
 
