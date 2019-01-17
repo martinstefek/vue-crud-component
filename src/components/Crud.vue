@@ -22,8 +22,8 @@
                                         @click="filtersOpened = !filtersOpened">
                                     Filters
                                 </button>
-                                <div class="dropdown-menu"
-                                     :class="{show: filtersOpened, 'dropdown-menu-right': useDefaultStyles}">
+                                <div class="dropdown-menu dropdown-menu-right"
+                                     :class="{show: filtersOpened}">
                                     <template v-for="(filterValues, key) in filterData">
                                         <div class="dropdown-item">
                                             <strong v-text="fieldsConfig[key].title || key"></strong>
@@ -50,8 +50,14 @@
                         <table class="table">
                             <thead>
                             <tr class="bg-light">
-                                <th v-for="(field, key) in fieldsPreview" v-text="field.title"
-                                    @click="sort(key, field)"></th>
+                                <th v-for="(field, key) in fieldsPreview">
+                                    <div @click="sort(key, field)" class="row m-0 align-items-center flex-nowrap" :class="{'cursor-pointer': field.sortable}">
+                                        <span class="mr-1">
+                                            {{ field.title }}
+                                        </span>
+                                        <icon-sort v-if="field.sortable" :value="key === selectedSorting ? sortDirection : null"></icon-sort>
+                                    </div>
+                                </th>
                                 <th></th>
                             </tr>
                             </thead>
@@ -78,9 +84,18 @@
 // TODO: Clean the code, remove unnecessary Lodash functions
 // TODO: Think about more customisable preview and form views
 // TODO: IE support
+// TODO: Check default property of COMMON_TYPES_CONFIG. Is it used?
+// TODO: Check Crud.vue allowSearch prop
+// TODO: Check Crud.vue allowFilter prop
+// TODO: Check Crud.vue allowCreate prop
+// TODO: Check Crud.vue allowUpdate prop
+// TODO: Check Crud.vue allowDelete prop
+// TODO: Check Crud.vue uniqueIdentifier
+// TODO: Try to add deeper fields config eg. type.name or type['name']
 import config from '../config/Crud.js'
 import CrudForm from './CrudForm'
 import ClickOutside from 'vue-click-outside'
+import IconSort from './icons/Sort'
 
 const lodash = {
     // get: require('lodash.get'),
@@ -91,13 +106,9 @@ const lodash = {
 
 export default {
     directives: { ClickOutside },
-    components: { CrudForm },
+    components: { CrudForm, IconSort },
 
     props: {
-        useDefaultStyles: {
-            default: true
-        },
-
         data: {
             type: [Object, Array],
             required: true
@@ -432,5 +443,9 @@ export default {
     .dropdown-menu.dropdown-menu-right {
         right: 0;
         left: auto;
+    }
+    
+    .cursor-pointer {
+        cursor: pointer;
     }
 </style>
