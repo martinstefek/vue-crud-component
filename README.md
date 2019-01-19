@@ -7,14 +7,18 @@ Vue Crud Component is a Vue.js component which do all the annoying repetitive ad
 or
 `npm install --save vue-crud-component`
 	
-    //JS
-    import CrudComponent from 'vue-crud-component'
-    Vue.use(CrudComponent)
-	
-	// HTML
-	<template>
-	<crud-component></crud-component>
-	</template>
+```javascript
+// JS
+import CrudComponent from 'vue-crud-component'
+Vue.use(CrudComponent)
+```
+
+```html
+// HTML
+<template>
+  <crud-component></crud-component>
+</template>
+```
 
 You can set your own name of the component by passing name property within object in a second argument of the `Vue.use()` method.
 `Vue.use(CrudComponent, {name: 'custom-component-name'})`
@@ -63,48 +67,48 @@ Every field key in the fields parameter has to be equal to some key in data para
 | componentProps | Object | false | empty Object | you can pass any required props down to the component (or custom component) in Object. eg. {options: {name: 'Default Name'}}
 
 Example:
-
-    <crud-component :data="[{
-	    "id": 88,  
-	    "first_name": "Wilhelm",  
-    	"last_name": "McCahey",  
-    	"email": "wmccahey2f@microsoft.com",  
-    	"credit_card": "maestro"
-    }, ...]"
-    :fields="{
-	    id: {
-		    type: 'ID',
-		    title: 'ID',
-		    sortable: true
-	    },
-	    first_name: {
-		    type: 'Text',
-		    title: 'First Name',
-		    sortable: true
-	    },
-	    last_name: {
-		    type: 'Text',
-		    title: 'Last Name',
-		    sortable: true
-	    },
-	    credit_card: {
-		    type: 'Select',
-		    title: 'Credit Card Type',
-		    filterable: true,
-		    componentProps: {
-			    options: {
-				    maestro: 'Maestro',
-				    master_card: 'Master Card',
-				    visa: 'Visa'
-			    }
+```vue
+<crud-component :data="[{
+    "id": 88,  
+    "first_name": "Wilhelm",  
+	"last_name": "McCahey",  
+	"email": "wmccahey2f@microsoft.com",  
+	"credit_card": "maestro"
+}, ...]"
+:fields="{
+    id: {
+	    type: 'ID',
+	    title: 'ID',
+	    sortable: true
+    },
+    first_name: {
+	    type: 'Text',
+	    title: 'First Name',
+	    sortable: true
+    },
+    last_name: {
+	    type: 'Text',
+	    title: 'Last Name',
+	    sortable: true
+    },
+    credit_card: {
+	    type: 'Select',
+	    title: 'Credit Card Type',
+	    filterable: true,
+	    componentProps: {
+		    options: {
+			    maestro: 'Maestro',
+			    master_card: 'Master Card',
+			    visa: 'Visa'
 		    }
-	    },
-	    email: {
-		    type: 'Email',
-		    title: 'Email'
 	    }
-    }"
-  
+    },
+    email: {
+	    type: 'Email',
+	    title: 'Email'
+    }
+}"
+```
   
 ## Customization
 At the moment the only customizable thing is preview of the records. I will provide more information soon... 
