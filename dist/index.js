@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 13);
+/******/ 	return __webpack_require__(__webpack_require__.s = 14);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -70,7 +70,7 @@
 "use strict";
 
 
-var bind = __webpack_require__(7);
+var bind = __webpack_require__(8);
 var isBuffer = __webpack_require__(61);
 
 /*global toString:true*/
@@ -615,10 +615,10 @@ function getDefaultAdapter() {
   var adapter;
   if (typeof XMLHttpRequest !== 'undefined') {
     // For browsers use XHR adapter
-    adapter = __webpack_require__(9);
+    adapter = __webpack_require__(10);
   } else if (typeof process !== 'undefined') {
     // For node use HTTP adapter
-    adapter = __webpack_require__(9);
+    adapter = __webpack_require__(10);
   }
   return adapter;
 }
@@ -693,7 +693,7 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 
 module.exports = defaults;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(9)))
 
 /***/ }),
 /* 5 */
@@ -702,9 +702,9 @@ module.exports = defaults;
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(34)
+var __vue_script__ = __webpack_require__(35)
 /* template */
-var __vue_template__ = __webpack_require__(35)
+var __vue_template__ = __webpack_require__(36)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -789,7 +789,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(52);
+var	fixUrls = __webpack_require__(53);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -1105,6 +1105,12 @@ function updateLink (link, options, obj) {
 /* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
+module.exports = __webpack_require__(60);
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
 "use strict";
 
 
@@ -1120,7 +1126,7 @@ module.exports = function bind(fn, thisArg) {
 
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -1310,7 +1316,7 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1321,7 +1327,7 @@ var settle = __webpack_require__(64);
 var buildURL = __webpack_require__(66);
 var parseHeaders = __webpack_require__(67);
 var isURLSameOrigin = __webpack_require__(68);
-var createError = __webpack_require__(10);
+var createError = __webpack_require__(11);
 var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(69);
 
 module.exports = function xhrAdapter(config) {
@@ -1497,7 +1503,7 @@ module.exports = function xhrAdapter(config) {
 
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1522,7 +1528,7 @@ module.exports = function createError(message, config, code, request, response) 
 
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1534,7 +1540,7 @@ module.exports = function isCancel(value) {
 
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1560,19 +1566,19 @@ module.exports = Cancel;
 
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(14);
+module.exports = __webpack_require__(15);
 
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Crud__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Crud__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Crud___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_Crud__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_sweetalert2__ = __webpack_require__(87);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_notification__ = __webpack_require__(91);
@@ -1590,17 +1596,17 @@ exports.install = function (Vue) {
 };
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(16)
+  __webpack_require__(17)
 }
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(20)
+var __vue_script__ = __webpack_require__(21)
 /* template */
 var __vue_template__ = __webpack_require__(86)
 /* template functional */
@@ -1641,17 +1647,17 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(17);
+var content = __webpack_require__(18);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(18)("0759b941", content, false, {});
+var update = __webpack_require__(19)("0759b941", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -1667,7 +1673,7 @@ if(false) {
 }
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(3)(false);
@@ -1681,7 +1687,7 @@ exports.push([module.i, "\n.dropdown-menu.dropdown-menu-right {\n    right: 0;\n
 
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -1700,7 +1706,7 @@ if (typeof DEBUG !== 'undefined' && DEBUG) {
   ) }
 }
 
-var listToStyles = __webpack_require__(19)
+var listToStyles = __webpack_require__(20)
 
 /*
 type StyleObject = {
@@ -1909,7 +1915,7 @@ function applyToTag (styleElement, obj) {
 
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports) {
 
 /**
@@ -1942,18 +1948,20 @@ module.exports = function listToStyles (parentId, list) {
 
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__config_Crud_js__ = __webpack_require__(21);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__CrudForm__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__config_Crud_js__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__CrudForm__ = __webpack_require__(55);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__CrudForm___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__CrudForm__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_click_outside__ = __webpack_require__(80);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_click_outside___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_vue_click_outside__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__icons_Sort__ = __webpack_require__(81);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__icons_Sort___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__icons_Sort__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_axios__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_axios__);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
@@ -2042,17 +2050,12 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 //
 //
 //
+//
+//
 
 // TODO: Clean the code, remove unnecessary Lodash functions - create Preview component and use Crud.vue as source
 // TODO: Think about more customisable preview and form views
-// TODO: IE support
 // TODO: Check default property of COMMON_TYPES_CONFIG. Is it used?
-// TODO: Check Crud.vue allowSearch prop
-// TODO: Check Crud.vue allowFilter prop
-// TODO: Check Crud.vue allowCreate prop
-// TODO: Check Crud.vue allowUpdate prop
-// TODO: Check Crud.vue allowDelete prop
-// TODO: Check Crud.vue uniqueIdentifier
 // TODO: Try to add deeper fields config eg. type.name or type['name']
 // TODO: Use location ['preview', 'update', 'create'] instead of ['preview', 'form']
 
@@ -2060,11 +2063,9 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
 
 
+
 var lodash = {
-    // get: require('lodash.get'),
     pickBy: __webpack_require__(84)
-    // filter: require('lodash.filter'),
-    // keyBy: require('lodash.keyby'),
 };
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2073,13 +2074,16 @@ var lodash = {
 
     props: {
         data: {
-            type: [Object, Array],
-            required: true
+            type: [Object, Array]
         },
 
         fields: {
             type: Object,
             required: true
+        },
+
+        httpGet: {
+            type: String
         },
 
         httpCreate: {
@@ -2101,6 +2105,16 @@ var lodash = {
             default: function _default() {
                 return (location.pathname + '/{id}').replace('//', '/');
             }
+        },
+
+        httpHeaders: {
+            type: Object,
+            default: {}
+        },
+
+        httpDataMap: {
+            type: Object,
+            default: function _default() {}
         },
 
         allowSearch: {
@@ -2138,6 +2152,11 @@ var lodash = {
 
         uniqueIdentifier: {
             default: 'id'
+        },
+
+        extraValidationRules: {
+            type: Object,
+            default: function _default() {}
         }
     },
 
@@ -2270,7 +2289,9 @@ var lodash = {
         recordsFiltered: function recordsFiltered() {
             var _this = this;
 
-            var output = this.deepCopy(this.records);
+            if (!this.records) return;
+
+            var output = this.records;
 
             // Search
             if (this.search.length > 0) {
@@ -2290,7 +2311,7 @@ var lodash = {
                             var key = _ref4[0];
                             var value = _ref4[1];
 
-                            if (_this.fieldsSearchable.includes(key) && value.toString().toLowerCase().includes(_this.search.toLowerCase())) {
+                            if (value && _this.fieldsSearchable.includes(key) && JSON.stringify(value).toString().toLowerCase().includes(_this.search.toLowerCase())) {
                                 itemIncluded = true;
                                 // If item was already found stop the for loop
                                 break;
@@ -2395,6 +2416,8 @@ var lodash = {
         filterData: function filterData() {
             var _this2 = this;
 
+            if (!this.records) return;
+
             var output = {};
 
             this.fieldsFilterable.forEach(function (item) {
@@ -2493,7 +2516,7 @@ var lodash = {
             Object.keys(this.fieldsConfig).forEach(function (key) {
                 return output[key] = _this3.fieldsConfig[key].default;
             });
-            this.selectedRecord = _extends({}, output, this.deepCopy(record));
+            this.selectedRecord = _extends({}, output, record);
             this.selectedRecordIndex = index;
         },
         editReset: function editReset() {
@@ -2534,17 +2557,32 @@ var lodash = {
         },
         sortReset: function sortReset() {
             this.selectedSorting = null;
+        },
+        updateRecord: function updateRecord(data) {
+            this.records[this.selectedRecordIndex] = data;
         }
     },
 
-    created: function created() {},
+    created: function created() {
+        var _this5 = this;
 
+        if (!this.data && !this.httpGet) {
+            console.error('You have to provide either static data in data prop or url for ajax request in httpGet prop ');
+        }
 
-    watch: {}
+        if (this.httpGet) {
+            __WEBPACK_IMPORTED_MODULE_4_axios___default.a.get(this.httpGet, {
+                headers: this.httpHeaders
+            }).then(function (_ref9) {
+                var data = _ref9.data;
+                return _this5.records = _this5.httpDataMap.get ? data[_this5.httpDataMap.get] : data;
+            });
+        }
+    }
 });
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2570,23 +2608,23 @@ var COMMON_TYPES_CONFIG = {
             title: 'ID',
             editable: false,
             searchable: true,
-            component: __webpack_require__(22),
+            component: __webpack_require__(23),
             canBeCreated: false
         }),
 
         Email: _extends({}, COMMON_TYPES_CONFIG, {
             title: 'Email',
             searchable: true,
-            component: __webpack_require__(25)
+            component: __webpack_require__(26)
         }),
 
         Text: _extends({}, COMMON_TYPES_CONFIG, {
             searchable: true,
-            component: __webpack_require__(28)
+            component: __webpack_require__(29)
         }),
 
         Number: _extends({}, COMMON_TYPES_CONFIG, {
-            component: __webpack_require__(31)
+            component: __webpack_require__(32)
         }),
 
         Select: _extends({}, COMMON_TYPES_CONFIG, {
@@ -2598,15 +2636,15 @@ var COMMON_TYPES_CONFIG = {
         }),
 
         Checkbox: _extends({}, COMMON_TYPES_CONFIG, {
-            component: __webpack_require__(36)
+            component: __webpack_require__(37)
         }),
 
         Radio: _extends({}, COMMON_TYPES_CONFIG, {
-            component: __webpack_require__(39)
+            component: __webpack_require__(40)
         }),
 
         DateTime: _extends({}, COMMON_TYPES_CONFIG, {
-            component: __webpack_require__(42)
+            component: __webpack_require__(43)
         }),
 
         Custom: _extends({}, COMMON_TYPES_CONFIG)
@@ -2614,15 +2652,15 @@ var COMMON_TYPES_CONFIG = {
 });
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(23)
+var __vue_script__ = __webpack_require__(24)
 /* template */
-var __vue_template__ = __webpack_require__(24)
+var __vue_template__ = __webpack_require__(25)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -2661,7 +2699,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2678,7 +2716,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -2701,15 +2739,15 @@ if (false) {
 }
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(26)
+var __vue_script__ = __webpack_require__(27)
 /* template */
-var __vue_template__ = __webpack_require__(27)
+var __vue_template__ = __webpack_require__(28)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -2748,7 +2786,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2778,7 +2816,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -2807,15 +2845,15 @@ if (false) {
 }
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(29)
+var __vue_script__ = __webpack_require__(30)
 /* template */
-var __vue_template__ = __webpack_require__(30)
+var __vue_template__ = __webpack_require__(31)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -2854,7 +2892,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2884,7 +2922,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -2913,15 +2951,15 @@ if (false) {
 }
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(32)
+var __vue_script__ = __webpack_require__(33)
 /* template */
-var __vue_template__ = __webpack_require__(33)
+var __vue_template__ = __webpack_require__(34)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -2960,7 +2998,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2990,7 +3028,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -3019,7 +3057,7 @@ if (false) {
 }
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3056,7 +3094,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -3097,15 +3135,15 @@ if (false) {
 }
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(37)
+var __vue_script__ = __webpack_require__(38)
 /* template */
-var __vue_template__ = __webpack_require__(38)
+var __vue_template__ = __webpack_require__(39)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -3144,7 +3182,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3208,7 +3246,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 });
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -3277,15 +3315,15 @@ if (false) {
 }
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(40)
+var __vue_script__ = __webpack_require__(41)
 /* template */
-var __vue_template__ = __webpack_require__(41)
+var __vue_template__ = __webpack_require__(42)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -3324,7 +3362,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3347,7 +3385,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 41 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -3367,15 +3405,15 @@ if (false) {
 }
 
 /***/ }),
-/* 42 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(43)
+var __vue_script__ = __webpack_require__(44)
 /* template */
-var __vue_template__ = __webpack_require__(53)
+var __vue_template__ = __webpack_require__(54)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -3414,14 +3452,14 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 43 */
+/* 44 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_datetime__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_datetime__ = __webpack_require__(45);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_datetime___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue_datetime__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_datetime_dist_vue_datetime_css__ = __webpack_require__(50);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_datetime_dist_vue_datetime_css__ = __webpack_require__(51);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_datetime_dist_vue_datetime_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue_datetime_dist_vue_datetime_css__);
 //
 //
@@ -3459,7 +3497,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 44 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
@@ -3469,7 +3507,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
  */
 
 (function (global, factory) {
-	 true ? factory(exports, __webpack_require__(45)) :
+	 true ? factory(exports, __webpack_require__(46)) :
 	typeof define === 'function' && define.amd ? define(['exports', 'luxon'], factory) :
 	(factory((global.VueDatetime = global.VueDatetime || {}),global.luxon));
 }(this, (function (exports,luxon) { 'use strict';
@@ -3623,7 +3661,7 @@ function weekStart () {
   var weekstart;
 
   try {
-    weekstart = __webpack_require__(46);
+    weekstart = __webpack_require__(47);
   } catch (e) {
     weekstart = window.weekstart;
   }
@@ -4384,7 +4422,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 
 /***/ }),
-/* 45 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12067,16 +12105,16 @@ exports.Settings = Settings;
 
 
 /***/ }),
-/* 46 */
+/* 47 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getWeekStartByRegion", function() { return getWeekStartByRegion$1; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getWeekStartByLocale", function() { return getWeekStartByLocale$1; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__api_js__ = __webpack_require__(47);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__langRegionMap_js__ = __webpack_require__(48);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__regionDayMap_js__ = __webpack_require__(49);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__api_js__ = __webpack_require__(48);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__langRegionMap_js__ = __webpack_require__(49);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__regionDayMap_js__ = __webpack_require__(50);
 
 
 
@@ -12094,7 +12132,7 @@ function getWeekStartByLocale$1(locale) {
 
 
 /***/ }),
-/* 47 */
+/* 48 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -12131,7 +12169,7 @@ function getWeekStartByLocale(locale, langRegionMap, regionDayMap) {
 
 
 /***/ }),
-/* 48 */
+/* 49 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -12221,7 +12259,7 @@ var langRegionMap = {
 
 
 /***/ }),
-/* 49 */
+/* 50 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -12464,13 +12502,13 @@ var regionDayMap = {
 
 
 /***/ }),
-/* 50 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(51);
+var content = __webpack_require__(52);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -12495,7 +12533,7 @@ if(false) {
 }
 
 /***/ }),
-/* 51 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(3)(false);
@@ -12509,7 +12547,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 
 /***/ }),
-/* 52 */
+/* 53 */
 /***/ (function(module, exports) {
 
 
@@ -12604,7 +12642,7 @@ module.exports = function (css) {
 
 
 /***/ }),
-/* 53 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -12641,13 +12679,13 @@ if (false) {
 }
 
 /***/ }),
-/* 54 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(55)
+var __vue_script__ = __webpack_require__(56)
 /* template */
 var __vue_template__ = __webpack_require__(79)
 /* template functional */
@@ -12688,22 +12726,25 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 55 */
+/* 56 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(57);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios__ = __webpack_require__(59);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_axios__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vee_validate__ = __webpack_require__(78);
 
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
+//
 //
 //
 //
@@ -12759,24 +12800,12 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
         this.validator = new __WEBPACK_IMPORTED_MODULE_2_vee_validate__["a" /* Validator */]();
 
-        var _loop = function _loop(key, value) {
-            _this.validator.attach({
-                initialValue: value,
-                name: key,
-                alias: _this.fieldsConfig[key].title || key,
-                rules: _this.fieldsConfig[key].rules,
-                getter: function getter() {
-                    return _this.record[key];
-                }
-            });
-        };
-
         var _iteratorNormalCompletion = true;
         var _didIteratorError = false;
         var _iteratorError = undefined;
 
         try {
-            for (var _iterator = Object.entries(this.record)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+            for (var _iterator = Object.entries(this.$parent.extraValidationRules)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
                 var _ref = _step.value;
 
                 var _ref2 = _slicedToArray(_ref, 2);
@@ -12784,7 +12813,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                 var key = _ref2[0];
                 var value = _ref2[1];
 
-                _loop(key, value);
+                this.validator.extend(key, value);
             }
         } catch (err) {
             _didIteratorError = true;
@@ -12800,6 +12829,16 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                 }
             }
         }
+
+        this.getValidationRules(function (key, value, alias, rules, getter) {
+            _this.validator.attach({
+                initialValue: value,
+                name: key,
+                alias: alias,
+                rules: rules,
+                getter: getter
+            });
+        });
     },
     data: function data() {
         return {
@@ -12812,11 +12851,88 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
 
     computed: {
+        conditionalValidationFields: function conditionalValidationFields() {
+            return Object.values(this.fieldsConfig).map(function (item) {
+                return item.conditionalRules;
+            }).filter(function (item) {
+                return item !== undefined;
+            }).map(function (item) {
+                return Object.keys(item);
+            }).flat(1);
+        },
+
+
         /**
          * Currently selected record
          */
         record: function record() {
-            return this.$parent.selectedRecord;
+            var object = {};
+
+            var _iteratorNormalCompletion2 = true;
+            var _didIteratorError2 = false;
+            var _iteratorError2 = undefined;
+
+            try {
+                for (var _iterator2 = Object.entries(this.$parent.selectedRecord)[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                    var _ref3 = _step2.value;
+
+                    var _ref4 = _slicedToArray(_ref3, 2);
+
+                    var key = _ref4[0];
+                    var value = _ref4[1];
+
+                    if (this.fieldsConfig[key] && this.fieldsConfig[key].restrictedTo) {
+                        var _iteratorNormalCompletion3 = true;
+                        var _didIteratorError3 = false;
+                        var _iteratorError3 = undefined;
+
+                        try {
+                            for (var _iterator3 = Object.entries(this.fieldsConfig[key].restrictedTo)[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+                                var _ref5 = _step3.value;
+
+                                var _ref6 = _slicedToArray(_ref5, 2);
+
+                                var restKey = _ref6[0];
+                                var restVal = _ref6[1];
+
+                                if (restVal.includes(this.$parent.selectedRecord[restKey])) {
+                                    object[key] = value;
+                                }
+                            }
+                        } catch (err) {
+                            _didIteratorError3 = true;
+                            _iteratorError3 = err;
+                        } finally {
+                            try {
+                                if (!_iteratorNormalCompletion3 && _iterator3.return) {
+                                    _iterator3.return();
+                                }
+                            } finally {
+                                if (_didIteratorError3) {
+                                    throw _iteratorError3;
+                                }
+                            }
+                        }
+                    } else {
+                        object[key] = value;
+                    }
+                }
+            } catch (err) {
+                _didIteratorError2 = true;
+                _iteratorError2 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                        _iterator2.return();
+                    }
+                } finally {
+                    if (_didIteratorError2) {
+                        throw _iteratorError2;
+                    }
+                }
+            }
+
+            return object;
         },
 
 
@@ -12862,7 +12978,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
     methods: {
         create: function () {
-            var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
+            var _ref7 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
                 var _this2 = this;
 
                 return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
@@ -12882,9 +12998,14 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
                             case 4:
 
-                                __WEBPACK_IMPORTED_MODULE_1_axios___default.a.post(this.$parent.httpCreate, this.record).then(function (response) {
+                                __WEBPACK_IMPORTED_MODULE_1_axios___default.a.post(this.$parent.httpCreate, this.record, {
+                                    headers: this.$parent.httpHeaders
+                                }).then(function (_ref8) {
+                                    var data = _ref8.data;
+
                                     _this2.toast('success', 'Great job!', _this2.$parent.entitySingular + ' has been successfully created.');
-                                    _this2.$parent.records.push(response.data);
+                                    _this2.$parent.records.push(_this2.$parent.httpDataMap.create ? data[_this2.$parent.httpDataMap.create] : data);
+                                    _this2.backToPreview();
                                 }).catch(function (e) {
                                     return _this2.toast('error', 'Oops...', 'Something went wrong!');
                                     console.error(e);
@@ -12899,13 +13020,13 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             }));
 
             function create() {
-                return _ref3.apply(this, arguments);
+                return _ref7.apply(this, arguments);
             }
 
             return create;
         }(),
         update: function () {
-            var _ref4 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2() {
+            var _ref9 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2() {
                 var _this3 = this;
 
                 return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
@@ -12925,9 +13046,14 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
                             case 4:
 
-                                __WEBPACK_IMPORTED_MODULE_1_axios___default.a.put(this.$parent.httpUpdate.replace('{id}', this.record[this.$parent.uniqueIdentifier]), this.record).then(function (response) {
+                                __WEBPACK_IMPORTED_MODULE_1_axios___default.a.put(this.$parent.httpUpdate.replace('{id}', this.record[this.$parent.uniqueIdentifier]), this.record, {
+                                    headers: this.$parent.httpHeaders
+                                }).then(function (_ref10) {
+                                    var data = _ref10.data;
+
                                     _this3.toast('success', 'Great job!', _this3.$parent.entitySingular + ' has been successfully updated.');
-                                    _this3.$parent.records.push(response.data);
+                                    _this3.$parent.updateRecord(_this3.$parent.httpDataMap.update ? data[_this3.$parent.httpDataMap.update] : data);
+                                    _this3.backToPreview();
                                 }).catch(function (e) {
                                     return _this3.toast('error', 'Oops...', 'Something went wrong!');
                                     console.error(e);
@@ -12942,7 +13068,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             }));
 
             function update() {
-                return _ref4.apply(this, arguments);
+                return _ref9.apply(this, arguments);
             }
 
             return update;
@@ -12953,7 +13079,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
          * If prompt is accepted, then removes record and show roast
          */
         remove: function () {
-            var _ref5 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3() {
+            var _ref11 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3() {
                 var _this4 = this;
 
                 return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
@@ -12967,9 +13093,14 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                     showCancelButton: true
                                 }).then(function (result) {
                                     if (result.value) {
-                                        __WEBPACK_IMPORTED_MODULE_1_axios___default.a.delete(_this4.$parent.httpDelete.replace('{id}', _this4.record[_this4.$parent.uniqueIdentifier])).then(function (response) {
+                                        __WEBPACK_IMPORTED_MODULE_1_axios___default.a.delete(_this4.$parent.httpDelete.replace('{id}', _this4.record[_this4.$parent.uniqueIdentifier]), {
+                                            headers: _this4.$parent.httpHeaders
+                                        }).then(function (_ref12) {
+                                            var data = _ref12.data;
+
                                             _this4.toast('success', 'Great job!', _this4.$parent.entitySingular + ' has been successfully removed.');
-                                            _this4.$delete(_this4.$parent.records), _this4.recordIndex;
+                                            _this4.$delete(_this4.$parent.records, _this4.recordIndex);
+                                            _this4.backToPreview();
                                         }).catch(function (e) {
                                             return _this4.toast('error', 'Oops...', 'Something went wrong!');
                                             console.error(e);
@@ -12986,7 +13117,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             }));
 
             function remove() {
-                return _ref5.apply(this, arguments);
+                return _ref11.apply(this, arguments);
             }
 
             return remove;
@@ -13002,19 +13133,123 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
         },
         backToPreview: function backToPreview() {
             this.$parent.editReset();
+        },
+        updateValidationRules: function updateValidationRules(field) {
+            var _this5 = this;
+
+            if (this.conditionalValidationFields.includes(field)) {
+                this.getValidationRules(function (key, value, alias, rules, getter) {
+                    var findField = _this5.validator.fields.find({ name: key });
+                    if (findField) {
+                        findField.update({ rules: rules });
+                    } else {
+                        _this5.validator.attach({
+                            initialValue: value,
+                            name: key,
+                            alias: alias,
+                            rules: rules,
+                            getter: getter
+                        });
+                    }
+                });
+
+                if (this.recordIndex !== 'CREATE') {
+                    this.validator.validateAll();
+                }
+            }
+        },
+        getValidationRules: function getValidationRules(callback) {
+            var _this6 = this;
+
+            var _loop = function _loop(key, value) {
+                extraRules = {};
+
+
+                if (_this6.fieldsConfig[key]) {
+                    if (_this6.fieldsConfig[key].conditionalRules) {
+                        var _iteratorNormalCompletion5 = true;
+                        var _didIteratorError5 = false;
+                        var _iteratorError5 = undefined;
+
+                        try {
+                            for (var _iterator5 = Object.entries(_this6.fieldsConfig[key].conditionalRules)[Symbol.iterator](), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
+                                var _ref15 = _step5.value;
+
+                                var _ref16 = _slicedToArray(_ref15, 2);
+
+                                var condKey = _ref16[0];
+                                var condVal = _ref16[1];
+
+                                var field = _this6.fieldsConfig[key].conditionalRules[condKey][_this6.record[condKey]];
+                                if (field) {
+                                    extraRules = _extends({}, extraRules, condVal[_this6.record[condKey]]);
+                                }
+                            }
+                        } catch (err) {
+                            _didIteratorError5 = true;
+                            _iteratorError5 = err;
+                        } finally {
+                            try {
+                                if (!_iteratorNormalCompletion5 && _iterator5.return) {
+                                    _iterator5.return();
+                                }
+                            } finally {
+                                if (_didIteratorError5) {
+                                    throw _iteratorError5;
+                                }
+                            }
+                        }
+                    }
+
+                    callback(key, value, _this6.fieldsConfig[key].title || key, _extends({}, _this6.fieldsConfig[key].rules, extraRules), function () {
+                        return _this6.record[key];
+                    });
+                }
+            };
+
+            var _iteratorNormalCompletion4 = true;
+            var _didIteratorError4 = false;
+            var _iteratorError4 = undefined;
+
+            try {
+                for (var _iterator4 = Object.entries(this.record)[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
+                    var _ref13 = _step4.value;
+
+                    var _ref14 = _slicedToArray(_ref13, 2);
+
+                    var key = _ref14[0];
+                    var value = _ref14[1];
+                    var extraRules;
+
+                    _loop(key, value);
+                }
+            } catch (err) {
+                _didIteratorError4 = true;
+                _iteratorError4 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion4 && _iterator4.return) {
+                        _iterator4.return();
+                    }
+                } finally {
+                    if (_didIteratorError4) {
+                        throw _iteratorError4;
+                    }
+                }
+            }
         }
     }
 });
 
 /***/ }),
-/* 56 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(57);
+module.exports = __webpack_require__(58);
 
 
 /***/ }),
-/* 57 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -13039,7 +13274,7 @@ var oldRuntime = hadRuntime && g.regeneratorRuntime;
 // Force reevalutation of runtime.js.
 g.regeneratorRuntime = undefined;
 
-module.exports = __webpack_require__(58);
+module.exports = __webpack_require__(59);
 
 if (hadRuntime) {
   // Restore the original runtime.
@@ -13055,7 +13290,7 @@ if (hadRuntime) {
 
 
 /***/ }),
-/* 58 */
+/* 59 */
 /***/ (function(module, exports) {
 
 /**
@@ -13788,12 +14023,6 @@ if (hadRuntime) {
 
 
 /***/ }),
-/* 59 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(60);
-
-/***/ }),
 /* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -13801,7 +14030,7 @@ module.exports = __webpack_require__(60);
 
 
 var utils = __webpack_require__(0);
-var bind = __webpack_require__(7);
+var bind = __webpack_require__(8);
 var Axios = __webpack_require__(62);
 var defaults = __webpack_require__(4);
 
@@ -13836,9 +14065,9 @@ axios.create = function create(instanceConfig) {
 };
 
 // Expose Cancel & CancelToken
-axios.Cancel = __webpack_require__(12);
+axios.Cancel = __webpack_require__(13);
 axios.CancelToken = __webpack_require__(76);
-axios.isCancel = __webpack_require__(11);
+axios.isCancel = __webpack_require__(12);
 
 // Expose all/spread
 axios.all = function all(promises) {
@@ -13991,7 +14220,7 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 "use strict";
 
 
-var createError = __webpack_require__(10);
+var createError = __webpack_require__(11);
 
 /**
  * Resolve or reject a Promise based on response status.
@@ -14424,7 +14653,7 @@ module.exports = InterceptorManager;
 
 var utils = __webpack_require__(0);
 var transformData = __webpack_require__(73);
-var isCancel = __webpack_require__(11);
+var isCancel = __webpack_require__(12);
 var defaults = __webpack_require__(4);
 var isAbsoluteURL = __webpack_require__(74);
 var combineURLs = __webpack_require__(75);
@@ -14584,7 +14813,7 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 "use strict";
 
 
-var Cancel = __webpack_require__(12);
+var Cancel = __webpack_require__(13);
 
 /**
  * A `CancelToken` is an object that can be used to request cancellation of an operation.
@@ -23481,133 +23710,135 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("h2", {
-        staticClass: "mt-2",
-        domProps: { textContent: _vm._s(_vm.heading) }
-      }),
-      _vm._v(" "),
+  return _c("div", [
+    _c("h2", {
+      staticClass: "mt-2",
+      domProps: { textContent: _vm._s(_vm.heading) }
+    }),
+    _vm._v(" "),
+    _c(
+      "button",
+      {
+        staticClass: "btn btn-link p-0 mb-3",
+        attrs: { type: "button" },
+        on: { click: _vm.backToPreview }
+      },
+      [
+        _vm._v(
+          "\n        Back to list of the " +
+            _vm._s(_vm.$parent.entityPlural) +
+            "\n    "
+        )
+      ]
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "card" }, [
       _c(
-        "button",
-        {
-          staticClass: "btn btn-link p-0 mb-3",
-          attrs: { type: "button" },
-          on: { click: _vm.backToPreview }
-        },
+        "div",
+        { staticClass: "card-body clearfix" },
         [
-          _vm._v(
-            "\n        Back to list of the " +
-              _vm._s(_vm.$parent.entityPlural) +
-              "\n    "
-          )
-        ]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "card" }, [
-        _c(
-          "div",
-          { staticClass: "card-body clearfix" },
-          [
-            _vm._l(_vm.record, function(value, key) {
-              return _c(
-                "div",
-                { staticClass: "form-group row border-bottom pb-3" },
-                [
-                  _c("label", {
-                    staticClass: "col-sm-3 col-md-2 col-form-label",
-                    domProps: {
-                      textContent: _vm._s(_vm.fieldsConfig[key].title || key)
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "col-sm-9 col-md-10" },
-                    [
-                      _c(
-                        _vm.fieldsConfig[key].component,
-                        _vm._b(
-                          {
-                            key: "form_field_" + key + "_" + _vm.recordIndex,
-                            tag: "component",
-                            attrs: {
-                              "component-props":
-                                _vm.fieldsConfig[key].componentProps
-                            },
-                            on: {
-                              input: function($event) {
-                                _vm.validator.validate(key)
+          _vm._l(_vm.record, function(value, key) {
+            return _vm.fieldsConfig[key]
+              ? _c(
+                  "div",
+                  { staticClass: "form-group row border-bottom pb-3" },
+                  [
+                    _c("label", {
+                      staticClass: "col-sm-3 col-md-2 col-form-label",
+                      domProps: {
+                        textContent: _vm._s(_vm.fieldsConfig[key].title || key)
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "col-sm-9 col-md-10" },
+                      [
+                        _c(
+                          _vm.fieldsConfig[key].component,
+                          _vm._b(
+                            {
+                              key: "form_field_" + key + "_" + _vm.recordIndex,
+                              tag: "component",
+                              attrs: {
+                                "component-props":
+                                  _vm.fieldsConfig[key].componentProps
+                              },
+                              on: {
+                                input: function($event) {
+                                  _vm.updateValidationRules(key)
+                                  _vm.validator.validate(key)
+                                }
+                              },
+                              model: {
+                                value: _vm.$parent.selectedRecord[key],
+                                callback: function($$v) {
+                                  _vm.$set(_vm.$parent.selectedRecord, key, $$v)
+                                },
+                                expression: "$parent.selectedRecord[key]"
                               }
                             },
-                            model: {
-                              value: _vm.$parent.selectedRecord[key],
-                              callback: function($$v) {
-                                _vm.$set(_vm.$parent.selectedRecord, key, $$v)
-                              },
-                              expression: "$parent.selectedRecord[key]"
-                            }
-                          },
-                          "component",
-                          _vm.fieldsConfig[key].componentProps,
-                          false
-                        )
-                      ),
-                      _vm._v(" "),
-                      _vm.errors[key]
-                        ? _c("span", {
-                            staticClass: "text-danger",
-                            domProps: { textContent: _vm._s(_vm.errors[key]) }
-                          })
-                        : _vm._e()
-                    ],
-                    1
+                            "component",
+                            _vm.fieldsConfig[key].componentProps,
+                            false
+                          )
+                        ),
+                        _vm._v(" "),
+                        _vm.errors[key]
+                          ? _c("span", {
+                              staticClass: "text-danger",
+                              domProps: { textContent: _vm._s(_vm.errors[key]) }
+                            })
+                          : _vm._e()
+                      ],
+                      1
+                    )
+                  ]
+                )
+              : _vm._e()
+          }),
+          _vm._v(" "),
+          _vm.recordIndex !== "CREATE"
+            ? _c(
+                "button",
+                {
+                  staticClass: "btn btn-outline-danger",
+                  attrs: { type: "button" },
+                  on: { click: _vm.remove }
+                },
+                [_vm._v("\n                Delete\n            ")]
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          (_vm.recordIndex !== "CREATE" && _vm.$parent.allowUpdate) ||
+          (_vm.recordIndex === "CREATE" && _vm.$parent.allowCreate)
+            ? _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary float-right",
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      _vm.recordIndex === "CREATE" ? _vm.create() : _vm.update()
+                    }
+                  }
+                },
+                [
+                  _vm._v(
+                    "\n                " +
+                      _vm._s(
+                        _vm.recordIndex === "CREATE" ? "Create" : "Update"
+                      ) +
+                      "\n            "
                   )
                 ]
               )
-            }),
-            _vm._v(" "),
-            _vm.recordIndex !== "CREATE"
-              ? _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-outline-danger",
-                    attrs: { type: "button" },
-                    on: { click: _vm.remove }
-                  },
-                  [_vm._v("\n                Delete\n            ")]
-                )
-              : _vm._e(),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-primary float-right",
-                attrs: { type: "button" },
-                on: {
-                  click: function($event) {
-                    _vm.recordIndex === "CREATE" ? _vm.create() : _vm.update()
-                  }
-                }
-              },
-              [
-                _vm._v(
-                  "\n                " +
-                    _vm._s(_vm.recordIndex === "CREATE" ? "Create" : "Update") +
-                    "\n            "
-                )
-              ]
-            )
-          ],
-          2
-        )
-      ]),
-      _vm._v(" "),
-      _c("notifications", { attrs: { group: "main" } })
-    ],
-    1
-  )
+            : _vm._e()
+        ],
+        2
+      )
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -26283,340 +26514,352 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    !_vm.selectedRecord
-      ? _c("div", [
-          _c("div", { staticClass: "clearfix" }, [
-            _c("h2", {
-              staticClass: "mt-2 float-left",
-              domProps: { textContent: _vm._s(_vm.entityPlural) }
-            }),
+  return _c(
+    "div",
+    [
+      _c("notifications", { attrs: { group: "main" } }),
+      _vm._v(" "),
+      !_vm.selectedRecord
+        ? _c("div", [
+            _c("div", { staticClass: "clearfix" }, [
+              _c("h2", {
+                staticClass: "mt-2 float-left",
+                domProps: { textContent: _vm._s(_vm.entityPlural) }
+              }),
+              _vm._v(" "),
+              _vm.allowCreate
+                ? _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary mt-2 float-right",
+                      attrs: { type: "button" },
+                      on: { click: _vm.create }
+                    },
+                    [
+                      _vm._v(
+                        "\n                Create " +
+                          _vm._s(_vm.entitySingular) +
+                          "\n            "
+                      )
+                    ]
+                  )
+                : _vm._e()
+            ]),
             _vm._v(" "),
-            _vm.allowCreate
-              ? _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-primary mt-2 float-right",
-                    attrs: { type: "button" },
-                    on: { click: _vm.create }
-                  },
-                  [
-                    _vm._v(
-                      "\n                Create " +
-                        _vm._s(_vm.entitySingular) +
-                        "\n            "
-                    )
-                  ]
-                )
-              : _vm._e()
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card" }, [
-            _c(
-              "div",
-              { staticClass: "card-body" },
-              [
-                _c("div", { staticClass: "row pb-2 mb-2 clearfix" }, [
-                  _vm.allowSearch
-                    ? _c("div", { staticClass: "col-sm-6 col-md-4" }, [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.search,
-                              expression: "search"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: { type: "text", placeholder: "Search..." },
-                          domProps: { value: _vm.search },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.search = $event.target.value
-                            }
-                          }
-                        })
-                      ])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.allowFilter
-                    ? _c("div", { staticClass: "col" }, [
-                        _c(
-                          "div",
-                          {
+            _c("div", { staticClass: "card" }, [
+              _c(
+                "div",
+                { staticClass: "card-body" },
+                [
+                  _c("div", { staticClass: "row pb-2 mb-2 clearfix" }, [
+                    _vm.allowSearch
+                      ? _c("div", { staticClass: "col-sm-6 col-md-4" }, [
+                          _c("input", {
                             directives: [
                               {
-                                name: "click-outside",
-                                rawName: "v-click-outside",
-                                value: function() {
-                                  return (_vm.filtersOpened = false)
-                                },
-                                expression: "() => filtersOpened = false"
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.search,
+                                expression: "search"
                               }
                             ],
-                            staticClass: "btn-group float-right"
-                          },
-                          [
-                            _c(
-                              "button",
-                              {
-                                staticClass: "btn btn-link dropdown-toggle",
-                                attrs: { type: "button" },
-                                on: {
-                                  click: function($event) {
-                                    _vm.filtersOpened = !_vm.filtersOpened
-                                  }
+                            staticClass: "form-control",
+                            attrs: { type: "text", placeholder: "Search..." },
+                            domProps: { value: _vm.search },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
                                 }
-                              },
-                              [
-                                _vm._v(
-                                  "\n                                Filters\n                            "
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "div",
-                              {
-                                staticClass:
-                                  "dropdown-menu dropdown-menu-right",
-                                class: { show: _vm.filtersOpened }
-                              },
-                              [
-                                _vm._l(_vm.filterData, function(
-                                  filterValues,
-                                  key
-                                ) {
-                                  return [
-                                    _c(
-                                      "div",
-                                      { staticClass: "dropdown-item" },
-                                      [
-                                        _c("strong", {
-                                          domProps: {
-                                            textContent: _vm._s(
-                                              _vm.fieldsConfig[key].title || key
-                                            )
-                                          }
-                                        })
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _vm._l(filterValues, function(value) {
-                                      return _c(
-                                        "label",
+                                _vm.search = $event.target.value
+                              }
+                            }
+                          })
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.allowFilter
+                      ? _c("div", { staticClass: "col" }, [
+                          _c(
+                            "div",
+                            {
+                              directives: [
+                                {
+                                  name: "click-outside",
+                                  rawName: "v-click-outside",
+                                  value: function() {
+                                    return (_vm.filtersOpened = false)
+                                  },
+                                  expression: "() => filtersOpened = false"
+                                }
+                              ],
+                              staticClass: "btn-group float-right"
+                            },
+                            [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-link dropdown-toggle",
+                                  attrs: { type: "button" },
+                                  on: {
+                                    click: function($event) {
+                                      _vm.filtersOpened = !_vm.filtersOpened
+                                    }
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                Filters\n                            "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "dropdown-menu dropdown-menu-right",
+                                  class: { show: _vm.filtersOpened }
+                                },
+                                [
+                                  _vm._l(_vm.filterData, function(
+                                    filterValues,
+                                    key
+                                  ) {
+                                    return [
+                                      _c(
+                                        "div",
                                         { staticClass: "dropdown-item" },
                                         [
-                                          _c("input", {
-                                            directives: [
-                                              {
-                                                name: "model",
-                                                rawName: "v-model",
-                                                value: _vm.selectedFilters[key],
-                                                expression:
-                                                  "selectedFilters[key]"
-                                              }
-                                            ],
-                                            attrs: { type: "checkbox" },
+                                          _c("strong", {
                                             domProps: {
-                                              value: value,
-                                              checked: Array.isArray(
-                                                _vm.selectedFilters[key]
+                                              textContent: _vm._s(
+                                                _vm.fieldsConfig[key].title ||
+                                                  key
                                               )
-                                                ? _vm._i(
+                                            }
+                                          })
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _vm._l(filterValues, function(value) {
+                                        return _c(
+                                          "label",
+                                          { staticClass: "dropdown-item" },
+                                          [
+                                            _c("input", {
+                                              directives: [
+                                                {
+                                                  name: "model",
+                                                  rawName: "v-model",
+                                                  value:
                                                     _vm.selectedFilters[key],
-                                                    value
-                                                  ) > -1
-                                                : _vm.selectedFilters[key]
-                                            },
-                                            on: {
-                                              change: function($event) {
-                                                var $$a =
-                                                    _vm.selectedFilters[key],
-                                                  $$el = $event.target,
-                                                  $$c = $$el.checked
-                                                    ? true
-                                                    : false
-                                                if (Array.isArray($$a)) {
-                                                  var $$v = value,
-                                                    $$i = _vm._i($$a, $$v)
-                                                  if ($$el.checked) {
-                                                    $$i < 0 &&
-                                                      _vm.$set(
-                                                        _vm.selectedFilters,
-                                                        key,
-                                                        $$a.concat([$$v])
-                                                      )
+                                                  expression:
+                                                    "selectedFilters[key]"
+                                                }
+                                              ],
+                                              attrs: { type: "checkbox" },
+                                              domProps: {
+                                                value: value,
+                                                checked: Array.isArray(
+                                                  _vm.selectedFilters[key]
+                                                )
+                                                  ? _vm._i(
+                                                      _vm.selectedFilters[key],
+                                                      value
+                                                    ) > -1
+                                                  : _vm.selectedFilters[key]
+                                              },
+                                              on: {
+                                                change: function($event) {
+                                                  var $$a =
+                                                      _vm.selectedFilters[key],
+                                                    $$el = $event.target,
+                                                    $$c = $$el.checked
+                                                      ? true
+                                                      : false
+                                                  if (Array.isArray($$a)) {
+                                                    var $$v = value,
+                                                      $$i = _vm._i($$a, $$v)
+                                                    if ($$el.checked) {
+                                                      $$i < 0 &&
+                                                        _vm.$set(
+                                                          _vm.selectedFilters,
+                                                          key,
+                                                          $$a.concat([$$v])
+                                                        )
+                                                    } else {
+                                                      $$i > -1 &&
+                                                        _vm.$set(
+                                                          _vm.selectedFilters,
+                                                          key,
+                                                          $$a
+                                                            .slice(0, $$i)
+                                                            .concat(
+                                                              $$a.slice($$i + 1)
+                                                            )
+                                                        )
+                                                    }
                                                   } else {
-                                                    $$i > -1 &&
-                                                      _vm.$set(
-                                                        _vm.selectedFilters,
-                                                        key,
-                                                        $$a
-                                                          .slice(0, $$i)
-                                                          .concat(
-                                                            $$a.slice($$i + 1)
-                                                          )
-                                                      )
+                                                    _vm.$set(
+                                                      _vm.selectedFilters,
+                                                      key,
+                                                      $$c
+                                                    )
                                                   }
-                                                } else {
-                                                  _vm.$set(
-                                                    _vm.selectedFilters,
-                                                    key,
-                                                    $$c
-                                                  )
                                                 }
                                               }
-                                            }
-                                          }),
-                                          _vm._v(
-                                            "\n\n                                        " +
-                                              _vm._s(value) +
-                                              "\n                                    "
-                                          )
-                                        ]
-                                      )
-                                    }),
-                                    _vm._v(" "),
-                                    _c("div", {
-                                      staticClass: "dropdown-divider"
-                                    })
-                                  ]
-                                }),
-                                _vm._v(" "),
-                                _c(
-                                  "button",
-                                  {
-                                    staticClass: "btn btn-link pl-4 pr-4",
-                                    attrs: { type: "button" },
-                                    on: { click: _vm.resetAllFilters }
-                                  },
-                                  [
-                                    _vm._v(
-                                      "\n                                    Reset all filters\n                                "
-                                    )
-                                  ]
-                                )
-                              ],
-                              2
-                            )
-                          ]
-                        )
-                      ])
-                    : _vm._e()
-                ]),
-                _vm._v(" "),
-                _vm._t(
-                  "preview",
-                  [
-                    _c("table", { staticClass: "table" }, [
-                      _c("thead", [
-                        _c(
-                          "tr",
-                          { staticClass: "bg-light" },
-                          [
-                            _vm._l(_vm.fieldsPreview, function(field, key) {
-                              return _c("th", [
-                                _c(
-                                  "div",
-                                  {
-                                    staticClass:
-                                      "row m-0 align-items-center flex-nowrap",
-                                    class: { "cursor-pointer": field.sortable },
-                                    on: {
-                                      click: function($event) {
-                                        _vm.sort(key, field)
-                                      }
-                                    }
-                                  },
-                                  [
-                                    _c("span", { staticClass: "mr-1" }, [
+                                            }),
+                                            _vm._v(
+                                              "\n\n                                        " +
+                                                _vm._s(value) +
+                                                "\n                                    "
+                                            )
+                                          ]
+                                        )
+                                      }),
+                                      _vm._v(" "),
+                                      _c("div", {
+                                        staticClass: "dropdown-divider"
+                                      })
+                                    ]
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "button",
+                                    {
+                                      staticClass: "btn btn-link pl-4 pr-4",
+                                      attrs: { type: "button" },
+                                      on: { click: _vm.resetAllFilters }
+                                    },
+                                    [
                                       _vm._v(
-                                        "\n                                        " +
-                                          _vm._s(field.title) +
-                                          "\n                                    "
+                                        "\n                                    Reset all filters\n                                "
                                       )
-                                    ]),
-                                    _vm._v(" "),
-                                    field.sortable
-                                      ? _c("icon-sort", {
-                                          attrs: {
-                                            value:
-                                              key === _vm.selectedSorting
-                                                ? _vm.sortDirection
-                                                : null
-                                          }
-                                        })
-                                      : _vm._e()
-                                  ],
-                                  1
-                                )
-                              ])
-                            }),
-                            _vm._v(" "),
-                            _c("th")
-                          ],
-                          2
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "tbody",
-                        _vm._l(_vm.recordsFiltered, function(field, index) {
-                          return _c(
+                                    ]
+                                  )
+                                ],
+                                2
+                              )
+                            ]
+                          )
+                        ])
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _vm._t(
+                    "preview",
+                    [
+                      _c("table", { staticClass: "table" }, [
+                        _c("thead", [
+                          _c(
                             "tr",
+                            { staticClass: "bg-light" },
                             [
-                              _vm._l(_vm.fieldsPreview, function(
-                                value,
-                                key,
-                                index
-                              ) {
-                                return _c("td", {
-                                  domProps: { textContent: _vm._s(field[key]) }
-                                })
+                              _vm._l(_vm.fieldsPreview, function(field, key) {
+                                return _c("th", [
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass:
+                                        "row m-0 align-items-center flex-nowrap",
+                                      class: {
+                                        "cursor-pointer": field.sortable
+                                      },
+                                      on: {
+                                        click: function($event) {
+                                          _vm.sort(key, field)
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _c("span", { staticClass: "mr-1" }, [
+                                        _vm._v(
+                                          "\n                                        " +
+                                            _vm._s(field.title) +
+                                            "\n                                    "
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      field.sortable
+                                        ? _c("icon-sort", {
+                                            attrs: {
+                                              value:
+                                                key === _vm.selectedSorting
+                                                  ? _vm.sortDirection
+                                                  : null
+                                            }
+                                          })
+                                        : _vm._e()
+                                    ],
+                                    1
+                                  )
+                                ])
                               }),
                               _vm._v(" "),
-                              _c("td", { staticClass: "text-right" }, [
-                                _c(
-                                  "button",
-                                  {
-                                    staticClass: "btn btn-link p-0",
-                                    attrs: { type: "button" },
-                                    on: {
-                                      click: function($event) {
-                                        _vm.edit(field, index)
-                                      }
-                                    }
-                                  },
-                                  [_vm._v("Edit")]
-                                )
-                              ])
+                              _c("th")
                             ],
                             2
                           )
-                        }),
-                        0
-                      )
-                    ])
-                  ],
-                  {
-                    previewFields: _vm.fieldsPreview,
-                    records: _vm.recordsFiltered
-                  }
-                )
-              ],
-              2
-            )
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "tbody",
+                          _vm._l(_vm.recordsFiltered, function(field, index) {
+                            return _c(
+                              "tr",
+                              [
+                                _vm._l(_vm.fieldsPreview, function(
+                                  value,
+                                  key,
+                                  index
+                                ) {
+                                  return _c("td", {
+                                    domProps: {
+                                      textContent: _vm._s(field[key])
+                                    }
+                                  })
+                                }),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "text-right" }, [
+                                  _c(
+                                    "button",
+                                    {
+                                      staticClass: "btn btn-link p-0",
+                                      attrs: { type: "button" },
+                                      on: {
+                                        click: function($event) {
+                                          _vm.edit(field, index)
+                                        }
+                                      }
+                                    },
+                                    [_vm._v("Edit")]
+                                  )
+                                ])
+                              ],
+                              2
+                            )
+                          }),
+                          0
+                        )
+                      ])
+                    ],
+                    {
+                      previewFields: _vm.fieldsPreview,
+                      records: _vm.recordsFiltered
+                    }
+                  )
+                ],
+                2
+              )
+            ])
           ])
-        ])
-      : _vm._e(),
-    _vm._v(" "),
-    _vm.selectedRecord ? _c("div", [_c("crud-form")], 1) : _vm._e()
-  ])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.selectedRecord ? _c("div", [_c("crud-form")], 1) : _vm._e()
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -39211,7 +39454,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
     attachTo.clearImmediate = clearImmediate;
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(8)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(9)))
 
 /***/ })
 /******/ ]);

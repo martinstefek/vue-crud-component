@@ -1,5 +1,7 @@
 <template>
     <div>
+        <notifications group="main" />
+
         <div v-if="!selectedRecord">
             <div class="clearfix">
                 <h2 v-text="entityPlural" class="mt-2 float-left"></h2>
@@ -83,26 +85,17 @@
 <script>
 // TODO: Clean the code, remove unnecessary Lodash functions - create Preview component and use Crud.vue as source
 // TODO: Think about more customisable preview and form views
-// TODO: IE support
 // TODO: Check default property of COMMON_TYPES_CONFIG. Is it used?
-// TODO: Check Crud.vue allowSearch prop
-// TODO: Check Crud.vue allowFilter prop
-// TODO: Check Crud.vue allowCreate prop
-// TODO: Check Crud.vue allowUpdate prop
-// TODO: Check Crud.vue allowDelete prop
-// TODO: Check Crud.vue uniqueIdentifier
 // TODO: Try to add deeper fields config eg. type.name or type['name']
 // TODO: Use location ['preview', 'update', 'create'] instead of ['preview', 'form']
 import config from '../config/Crud.js'
 import CrudForm from './CrudForm'
 import ClickOutside from 'vue-click-outside'
 import IconSort from './icons/Sort'
+import axios from 'axios'
 
 const lodash = {
-    // get: require('lodash.get'),
     pickBy: require('lodash.pickby'),
-    // filter: require('lodash.filter'),
-    // keyBy: require('lodash.keyby'),
 }
 
 export default {
@@ -111,13 +104,16 @@ export default {
 
     props: {
         data: {
-            type: [Object, Array],
-            required: true
+            type: [Object, Array]
         },
 
         fields: {
             type: Object,
             required: true
+        },
+
+        httpGet: {
+            type: String
         },
 
         httpCreate: {
@@ -133,6 +129,16 @@ export default {
         httpDelete: {
             type: String,
             default: () => (location.pathname + '/{id}').replace('//', '/')
+        },
+
+        httpHeaders: {
+            type: Object,
+            default: {}
+        },
+
+        httpDataMap: {
+            type: Object,
+            default: () => {}
         },
 
         allowSearch: {
@@ -170,6 +176,11 @@ export default {
 
         uniqueIdentifier: {
             default: 'id'
+        },
+
+        extraValidationRules: {
+            type: Object,
+            default: () => {}
         }
     },
 
@@ -260,7 +271,9 @@ export default {
          * @returns {Object, Array}
          */
         recordsFiltered() {
-            let output = this.deepCopy(this.records)
+            if (!this.records) return
+
+            let output = this.records
 
             // Search
             if (this.search.length > 0) {
@@ -268,7 +281,7 @@ export default {
                     let itemIncluded = false
 
                     for (const [key, value] of Object.entries(item)) {
-                        if (this.fieldsSearchable.includes(key) && value.toString().toLowerCase().includes(this.search.toLowerCase())) {
+                        if (value && this.fieldsSearchable.includes(key) && JSON.stringify(value).toString().toLowerCase().includes(this.search.toLowerCase())) {
                             itemIncluded = true
                             // If item was already found stop the for loop
                             break
@@ -328,6 +341,8 @@ export default {
          * @returns {Object} of all possible values of filterable fields
          */
         filterData() {
+            if (!this.records) return
+
             let output = {}
 
             this.fieldsFilterable.forEach(item => {
@@ -388,7 +403,7 @@ export default {
         edit(record, index = null) {
             let output = {}
             Object.keys(this.fieldsConfig).forEach(key => output[key] = this.fieldsConfig[key].default)
-            this.selectedRecord = {...output, ...this.deepCopy(record)}
+            this.selectedRecord = {...output, ...record}
             this.selectedRecordIndex = index
         },
 
@@ -427,16 +442,24 @@ export default {
 
         sortReset() {
             this.selectedSorting = null
+        },
+
+        updateRecord(data) {
+            this.records[this.selectedRecordIndex] = data
         }
     },
 
     created() {
+        if (!this.data && !this.httpGet) {
+            console.error('You have to provide either static data in data prop or url for ajax request in httpGet prop ')
+        }
 
+        if (this.httpGet) {
+            axios.get(this.httpGet, {
+                headers: this.httpHeaders
+            }).then(({data}) => this.records = this.httpDataMap.get ? data[this.httpDataMap.get] : data)
+        }
     },
-
-    watch: {
-
-    }
 }
 </script>
 

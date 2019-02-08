@@ -8,7 +8,7 @@
 
         <div class="card">
             <div class="card-body clearfix">
-                <div v-for="(value, key) in record" class="form-group row border-bottom pb-3">
+                <div v-for="(value, key) in record" v-if="fieldsConfig[key]" class="form-group row border-bottom pb-3">
                     <label v-text="fieldsConfig[key].title || key" class="col-sm-3 col-md-2 col-form-label"></label>
 
                     <div class="col-sm-9 col-md-10">
@@ -17,7 +17,7 @@
                                    :key="'form_field_' + key + '_' + recordIndex"
                                    v-bind="fieldsConfig[key].componentProps"
                                    v-model="$parent.selectedRecord[key]"
-                                   @input="validator.validate(key)"
+                                   @input="updateValidationRules(key); validator.validate(key)"
                         ></component>
 
                         <span v-if="errors[key]" v-text="errors[key]" class="text-danger"></span>
@@ -28,13 +28,14 @@
                     Delete
                 </button>
 
-                <button @click="recordIndex === 'CREATE' ? create() : update()" type="button" class="btn btn-primary float-right">
+                <button v-if="(recordIndex !== 'CREATE' && $parent.allowUpdate) || (recordIndex === 'CREATE' && $parent.allowCreate)"
+                        @click="recordIndex === 'CREATE' ? create() : update()"
+                        type="button"
+                        class="btn btn-primary float-right">
                     {{ recordIndex === 'CREATE' ? 'Create' : 'Update' }}
                 </button>
             </div>
         </div>
-
-        <notifications group="main" />
     </div>
 </template>
 
@@ -51,15 +52,19 @@
         created() {
             this.validator = new Validator()
 
-            for (const [key, value] of Object.entries(this.record)) {
+            for (const [key, value] of Object.entries(this.$parent.extraValidationRules)) {
+                this.validator.extend(key, value)
+            }
+
+            this.getValidationRules((key, value, alias, rules, getter) => {
                 this.validator.attach({
                     initialValue: value,
                     name: key,
-                    alias: this.fieldsConfig[key].title || key,
-                    rules: this.fieldsConfig[key].rules,
-                    getter: () => this.record[key]
+                    alias: alias,
+                    rules: rules,
+                    getter: getter
                 })
-            }
+            })
         },
 
         data() {
@@ -72,11 +77,30 @@
         },
 
         computed: {
+            conditionalValidationFields() {
+                return Object.values(this.fieldsConfig).map(item => item.conditionalRules).filter(item => item !== undefined).map(item => Object.keys(item)).flat(1)
+            },
+
             /**
              * Currently selected record
              */
             record() {
-                return this.$parent.selectedRecord
+                let object = {}
+
+                for (const [key, value] of Object.entries(this.$parent.selectedRecord)) {
+                    if (this.fieldsConfig[key] && this.fieldsConfig[key].restrictedTo) {
+                        for (const [restKey, restVal] of Object.entries(this.fieldsConfig[key].restrictedTo)) {
+                            if (restVal.includes(this.$parent.selectedRecord[restKey])) {
+                                object[key] = value
+                            }
+                        }
+
+                    } else {
+                        object[key] = value
+                    }
+                }
+
+                return object
             },
 
             /**
@@ -119,10 +143,13 @@
                 if (!await this.validator.validateAll())
                     return this.toast('error', 'Oops...', 'Some of the fields in form are invalid. Please, correct them.')
 
-                axios.post(this.$parent.httpCreate, this.record)
-                    .then((response) => {
+                axios.post(this.$parent.httpCreate, this.record, {
+                    headers: this.$parent.httpHeaders
+                })
+                    .then(({data}) => {
                         this.toast('success', 'Great job!', (this.$parent.entitySingular + ' has been successfully created.'))
-                        this.$parent.records.push(response.data)
+                        this.$parent.records.push(this.$parent.httpDataMap.create ? data[this.$parent.httpDataMap.create] : data)
+                        this.backToPreview()
                     })
                     .catch((e) => {
                         return this.toast('error', 'Oops...', 'Something went wrong!')
@@ -134,10 +161,13 @@
                 if (!await this.validator.validateAll())
                     return this.toast('error', 'Oops...', 'Some of the fields in form are invalid. Please, correct them.')
 
-                axios.put(this.$parent.httpUpdate.replace('{id}', this.record[this.$parent.uniqueIdentifier]), this.record)
-                    .then((response) => {
+                axios.put(this.$parent.httpUpdate.replace('{id}', this.record[this.$parent.uniqueIdentifier]), this.record, {
+                    headers: this.$parent.httpHeaders
+                })
+                    .then(({data}) => {
                         this.toast('success', 'Great job!', (this.$parent.entitySingular + ' has been successfully updated.'))
-                        this.$parent.records.push(response.data)
+                        this.$parent.updateRecord(this.$parent.httpDataMap.update ? data[this.$parent.httpDataMap.update] : data)
+                        this.backToPreview()
                     })
                     .catch((e) => {
                         return this.toast('error', 'Oops...', 'Something went wrong!')
@@ -156,10 +186,13 @@
                     showCancelButton: true,
                 }).then((result) => {
                     if (result.value) {
-                        axios.delete(this.$parent.httpDelete.replace('{id}', this.record[this.$parent.uniqueIdentifier]))
-                            .then((response) => {
+                        axios.delete(this.$parent.httpDelete.replace('{id}', this.record[this.$parent.uniqueIdentifier]), {
+                            headers: this.$parent.httpHeaders
+                        })
+                            .then(({data}) => {
                                 this.toast('success', 'Great job!', (this.$parent.entitySingular + ' has been successfully removed.'))
-                                this.$delete(this.$parent.records), this.recordIndex
+                                this.$delete(this.$parent.records, this.recordIndex)
+                                this.backToPreview()
                             })
                             .catch((e) => {
                                 return this.toast('error', 'Oops...', 'Something went wrong!')
@@ -181,6 +214,49 @@
 
             backToPreview() {
                 this.$parent.editReset()
+            },
+
+            updateValidationRules(field) {
+                if (this.conditionalValidationFields.includes(field)) {
+                    this.getValidationRules((key, value, alias, rules, getter) => {
+                        let findField = this.validator.fields.find({ name: key })
+                            if (findField) {
+                                findField.update({ rules: rules })
+
+                            } else {
+                                this.validator.attach({
+                                    initialValue: value,
+                                    name: key,
+                                    alias: alias,
+                                    rules: rules,
+                                    getter: getter
+                                })
+                            }
+                    })
+
+                    if (this.recordIndex !== 'CREATE') {
+                        this.validator.validateAll()
+                    }
+                }
+            },
+
+            getValidationRules(callback) {
+                for (const [key, value] of Object.entries(this.record)) {
+                    var extraRules = {}
+
+                    if (this.fieldsConfig[key]) {
+                        if (this.fieldsConfig[key].conditionalRules) {
+                            for (const [condKey, condVal] of Object.entries(this.fieldsConfig[key].conditionalRules)) {
+                                let field = this.fieldsConfig[key].conditionalRules[condKey][this.record[condKey]]
+                                if (field) {
+                                    extraRules = { ...extraRules, ...condVal[this.record[condKey]] }
+                                }
+                            }
+                        }
+
+                        callback(key, value, this.fieldsConfig[key].title || key, { ...this.fieldsConfig[key].rules, ...extraRules }, () => this.record[key])
+                    }
+                }
             }
         },
     }
