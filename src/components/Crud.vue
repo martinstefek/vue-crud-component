@@ -53,7 +53,7 @@
                             <thead>
                             <tr class="bg-light">
                                 <th v-for="(field, key) in fieldsPreview">
-                                    <div @click="sort(key, field)" class="row m-0 align-items-center flex-nowrap" :class="{'cursor-pointer': field.sortable}">
+                                    <div @click="sort(key, field)" class="row m-0 align-items-center flex-nowrap" :style="{'cursor': field.sortable ? 'pointer' : false}">
                                         <span class="mr-1">
                                             {{ field.title }}
                                         </span>
@@ -83,20 +83,16 @@
 </template>
 
 <script>
-// TODO: Clean the code, remove unnecessary Lodash functions - create Preview component and use Crud.vue as source
 // TODO: Think about more customisable preview and form views
-// TODO: Check default property of COMMON_TYPES_CONFIG. Is it used?
+// TODO: Add loading to the delete, create and update buttons
 // TODO: Try to add deeper fields config eg. type.name or type['name']
 // TODO: Use location ['preview', 'update', 'create'] instead of ['preview', 'form']
 import config from '../config/Crud.js'
+import { lodash } from '../config/helpers'
 import CrudForm from './CrudForm'
-import ClickOutside from 'vue-click-outside'
 import IconSort from './icons/Sort'
 import axios from 'axios'
-
-const lodash = {
-    pickBy: require('lodash.pickby'),
-}
+import ClickOutside from 'vue-click-outside'
 
 export default {
     directives: { ClickOutside },
@@ -310,7 +306,10 @@ export default {
 
             // Sorting
             if (this.selectedSorting) {
-                let sortNumber = ['ID', 'NUMBER'].includes(this.fieldsConfig[this.selectedSorting].type)
+                // Need to create deep copy of the data because otherwise Array.sort() modifies original data
+                output = this.deepCopy(output)
+
+                let sortNumber = ['ID', 'Number'].includes(this.fieldsConfig[this.selectedSorting].type)
 
                 if (sortNumber) {
                     output = output.sort((a, b) => {
@@ -457,19 +456,8 @@ export default {
         if (this.httpGet) {
             axios.get(this.httpGet, {
                 headers: this.httpHeaders
-            }).then(({data}) => this.records = this.httpDataMap.get ? data[this.httpDataMap.get] : data)
+            }).then(({data}) => this.records = lodash.get(data, this.httpDataMap.get, data))
         }
     },
 }
 </script>
-
-<style>
-    .dropdown-menu.dropdown-menu-right {
-        right: 0;
-        left: auto;
-    }
-    
-    .cursor-pointer {
-        cursor: pointer;
-    }
-</style>

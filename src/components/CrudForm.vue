@@ -24,15 +24,18 @@
                     </div>
                 </div>
 
-                <button v-if="recordIndex !== 'CREATE'" @click="remove" type="button" class="btn btn-outline-danger">
+                <button v-if="recordIndex !== 'CREATE'" @click="remove" :disabled="requestInProgress" type="button" class="btn btn-outline-danger">
                     Delete
+                    <icon-loading ref="loading-delete" color="#f19da3"></icon-loading>
                 </button>
 
                 <button v-if="(recordIndex !== 'CREATE' && $parent.allowUpdate) || (recordIndex === 'CREATE' && $parent.allowCreate)"
                         @click="recordIndex === 'CREATE' ? create() : update()"
+                        :disabled="requestInProgress"
                         type="button"
                         class="btn btn-primary float-right">
                     {{ recordIndex === 'CREATE' ? 'Create' : 'Update' }}
+                    <icon-loading ref="loading-create-update"></icon-loading>
                 </button>
             </div>
         </div>
@@ -40,11 +43,14 @@
 </template>
 
 <script>
-    // import Vue from 'vue'
     import axios from 'axios'
     import { Validator } from 'vee-validate'
+    import { lodash } from '../config/helpers'
+    import IconLoading from './icons/Loading'
 
     export default {
+
+        components: { IconLoading },
 
         /**
          * On created life hook, create Validator instance and attach every field with value, getter, alias...
@@ -72,11 +78,16 @@
                 /**
                  * Reactive VeeValidate Validator instance
                  */
-                validator: new Validator()
+                validator: new Validator(),
+                requestInProgress: false
             }
         },
 
         computed: {
+            /**
+             * This computed property contains list of array of fields which should trigger update of the fields
+             * Update of the fields trigger only specific fields, because their value is conditional to some fields.
+             */
             conditionalValidationFields() {
                 return Object.values(this.fieldsConfig).map(item => item.conditionalRules).filter(item => item !== undefined).map(item => Object.keys(item)).flat(1)
             },
@@ -143,36 +154,46 @@
                 if (!await this.validator.validateAll())
                     return this.toast('error', 'Oops...', 'Some of the fields in form are invalid. Please, correct them.')
 
+                // Show loading on button
+                this.$refs['loading-create-update'].show()
+                this.requestInProgress = true
+
                 axios.post(this.$parent.httpCreate, this.record, {
                     headers: this.$parent.httpHeaders
                 })
                     .then(({data}) => {
                         this.toast('success', 'Great job!', (this.$parent.entitySingular + ' has been successfully created.'))
-                        this.$parent.records.push(this.$parent.httpDataMap.create ? data[this.$parent.httpDataMap.create] : data)
+                        this.$parent.records.push(lodash.get(data, this.$parent.httpDataMap.create, data))
                         this.backToPreview()
                     })
                     .catch((e) => {
-                        return this.toast('error', 'Oops...', 'Something went wrong!')
+                        this.toast('error', 'Oops...', 'Something went wrong!')
                         console.error(e)
                     })
+                    .finally(() => this.requestInProgress = false)
             },
 
             async update() {
                 if (!await this.validator.validateAll())
                     return this.toast('error', 'Oops...', 'Some of the fields in form are invalid. Please, correct them.')
 
+                // Show loading on button
+                this.$refs['loading-create-update'].show()
+                this.requestInProgress = true
+
                 axios.put(this.$parent.httpUpdate.replace('{id}', this.record[this.$parent.uniqueIdentifier]), this.record, {
                     headers: this.$parent.httpHeaders
                 })
                     .then(({data}) => {
                         this.toast('success', 'Great job!', (this.$parent.entitySingular + ' has been successfully updated.'))
-                        this.$parent.updateRecord(this.$parent.httpDataMap.update ? data[this.$parent.httpDataMap.update] : data)
+                        this.$parent.updateRecord( lodash.get(data, this.$parent.httpDataMap.update, data))
                         this.backToPreview()
                     })
                     .catch((e) => {
-                        return this.toast('error', 'Oops...', 'Something went wrong!')
+                        this.toast('error', 'Oops...', 'Something went wrong!')
                         console.error(e)
                     })
+                    .finally(() => this.requestInProgress = false)
             },
 
             /**
@@ -186,6 +207,10 @@
                     showCancelButton: true,
                 }).then((result) => {
                     if (result.value) {
+                        // Show loading on button
+                        this.$refs['loading-delete'].show()
+                        this.requestInProgress = true
+
                         axios.delete(this.$parent.httpDelete.replace('{id}', this.record[this.$parent.uniqueIdentifier]), {
                             headers: this.$parent.httpHeaders
                         })
@@ -195,9 +220,10 @@
                                 this.backToPreview()
                             })
                             .catch((e) => {
-                                return this.toast('error', 'Oops...', 'Something went wrong!')
+                                this.toast('error', 'Oops...', 'Something went wrong!')
                                 console.error(e)
                             })
+                            .finally(() => this.requestInProgress = false)
                     }
                 })
             },
@@ -216,9 +242,17 @@
                 this.$parent.editReset()
             },
 
+            /**
+             * This is trigger function for updating validation rules.
+             * If emitted field is in conditionalValidationFields computed property
+             * then the function show take action.
+             */
             updateValidationRules(field) {
                 if (this.conditionalValidationFields.includes(field)) {
                     this.getValidationRules((key, value, alias, rules, getter) => {
+
+                        // If the field isn't attached to the validator yet it can't be updated.
+                        // It has to be attached instead
                         let findField = this.validator.fields.find({ name: key })
                             if (findField) {
                                 findField.update({ rules: rules })
@@ -240,6 +274,11 @@
                 }
             },
 
+            /**
+             * Returns specific validation rules for each field inc. current conditional validations
+             * @param callback function it is used for applying current validation rules to fields.
+             * @see updateValidationRules
+             */
             getValidationRules(callback) {
                 for (const [key, value] of Object.entries(this.record)) {
                     var extraRules = {}
