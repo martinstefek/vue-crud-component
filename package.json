@@ -9,14 +9,9 @@
   "license": "MIT",
   "author": "Martin Stefek",
   "scripts": {
-    "dev": "yarn run development",
-    "development": "node node_modules/cross-env/dist/bin/cross-env.js NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "dev": "node node_modules/cross-env/dist/bin/cross-env.js NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
     "watch": "node node_modules/cross-env/dist/bin/cross-env.js NODE_ENV=development node_modules/webpack/bin/webpack.js --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-    "watch-poll": "yarn run watch -- --watch-poll",
-    "hot": "node node_modules/cross-env/dist/bin/cross-env.js NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
-    "prod": "yarn run production",
-    "production": "node node_modules/cross-env/dist/bin/cross-env.js NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "prod": "node node_modules/cross-env/dist/bin/cross-env.js NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
   },
   "devDependencies": {
     "cross-env": "^5.1",
@@ -26,9 +21,7 @@
     "vue": "^2.5.7"
   },
   "dependencies": {
-    "lodash.filter": "^4.6.0",
     "lodash.get": "^4.4.2",
-    "lodash.keyby": "^4.6.0",
     "lodash.pickby": "^4.6.0",
     "luxon": "^1.10.0",
     "vee-validate": "^2.1.5",
